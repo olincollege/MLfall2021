@@ -268,7 +268,7 @@ Before we jump into the \emph{what} of linear regression, let's spend a little b
 
 \bi
 \item \textbf{Transparent:} it's pretty easy to examine the model and understand how it arrives at its predictions.
-\item \textbf{Computational tractable:} models can be trained efficiently on datasets with large numbers of features and data points.
+\item \textbf{Computationally tractable:} models can be trained efficiently on datasets with large numbers of features and data points.
 \item \textbf{Easy to implement:} linear regression can be implemented using a number of different algorithms (e.g., gradient descent, closed-form solution).  Even if the algorithm is not built into your favorite numerical computation library, the algorithm can be implemented in only a couple of lines of code.
 \ei
 
@@ -287,13 +287,13 @@ Therefore, the OLS algorithm will use the training data to select the optimal va
 \end{align}
 
 \begin{notice}
-Digesting mathematical equations like this can be daunting, but your understanding will be increased by unpacking them carefully.  Make sure you understand what was substituted and why in each of these lines.  Make sure you understand what each symbol represents.  If you are confused, ask for help (e.g., post on NB).
+Digesting mathematical equations like this can be daunting, but your understanding will be increased by unpacking them carefully.  Make sure you understand what was substituted and why in each of these lines.  Make sure you understand what each symbol represents.  If you are confused, ask for help (e.g., post on discord).
 \end{notice}
 
 While we haven't talked at all about how to find $\mlvec{w}^\star$, that will be the focus of the next assignment, once we have $\mlvec{w}^\star$ we can predict a value for a new input point, $\mlvec{x}$, by predicting the corresponding (unknown) output, $y$, as $\hat{y} = \mlvec{w^\star} \cdot \mlvec{x}$.  In this way, we have used the training data to learn how to make predictions about unseen data, which is the hallmark of supervised machine learning!
 
 \begin{exercise}
-Draw a scatter plot in 2D (the x-axis is the independent variable and the y-axis is the dependent variable).  Fill in a few data points and draw a potential line of best fit.  On the plot identify the vertical differences between the data points and the line (these differences are the residuals).  Draw a second potential line of best fit and mark the residuals.  From the point of view of ordinary least-squares, which of these lines is better?
+Draw a scatter plot in 2D (the x-axis is the independent variable and the y-axis is the dependent variable).  In other words, draw five or so data points, placed wherever you like. Next, draw a potential line of best fit, a straight line that is as close to your data points.  On the plot mark the vertical differences between the data points and the line (these differences are called the residuals).  Draw a second potential line of best fit and mark the residuals.  From the point of view of ordinary least-squares, which of these lines is better (i.e. has the smallest residuals)?
 
 \begin{boxedsolution}
 \begin{center}
