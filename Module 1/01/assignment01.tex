@@ -8,7 +8,7 @@
 
 \title{Assignment 1: Linear Regression}
 \author{Machine Learning}
-\date{Fall 2019}
+\date{Fall 2021}
 
 \begin{document}
 
@@ -25,6 +25,7 @@
 \ei
 \end{learningobjectives}
 
+\emph{This document contains a lot of external links. They are there to help you learn more if you are interested. You are not required to read/watch all the linked material.}
 
 \section{Six Big Ideas in Machine Learning}
 Before diving into the specifics of our first machine learning algorithm, let's examine some important ideas in machine learning.  Why six big ideas?  If Rob Martello has taught us anything, it's that all good things come in sixes.
@@ -88,7 +89,7 @@ As an example of when a solution to the reframed problem would not be desirable,
 
 The notion that the solution an algorithm finds might be unpredictable to the designer is known as ``emergence.''  Some cool examples of this played out in actual experiments in evolving virtual creatures, which are summarized in the paper \href{https://arxiv.org/pdf/1803.03453.pdf}{The Surprising Creativity of Digital Evolution}.  For instance, a virtual character learned that falling down, see picture above, and getting up was more efficient for locomotion than constantly hopping (which is what the designer had intended the system to learn).
 
-For more examples of this sort of thing, consider checking out \href{https://www.youtube.com/watch?v=bBt0imn77Zg}{Karl Sims: Evolved Virtual Creatures} or the short article \href{https://aiweirdness.com/post/172894792687/when-algorithms-surprise-us}{When AI Surprises Us}.  This also connects back to the age-old debate over whether \href{https://www.youtube.com/watch?v=8M_1GAX3WcI}{falling with style can be considered flying}.
+For more examples of this sort of thing, consider checking out \href{https://www.youtube.com/watch?v=bBt0imn77Zg}{Karl Sims: Evolved Virtual Creatures} or the short article \href{https://aiweirdness.com/post/172894792687/when-algorithms-surprise-us}{When AI Surprises Us}.  This also connects back to the age-old debate over whether \href{https://www.youtube.com/watch?v=DwN6efmhp7E}{falling with style can be considered flying}.
 
 
 \subsection*{Idea 4: ML Systems Can Learn Intermediate Representations}
@@ -104,10 +105,11 @@ ANNs accept input patterns at an array of virtual neurons called the input layer
 What's amazing about ANNs is that there are learning algorithms for setting the connection strengths between these virtual neurons (the black arrows in Figure~\ref{fig:ann}) based on training data (input / output pairs).  These learning algorithms tune the connections strengths (also called ``weights'') such that for the provided training data the network produces the appropriate training outputs (e.g., if you show the network a training set of images of cats or dogs, over time the network will adjust its weights so that the output is ``cat'' when the network is presented an image of a cat and ``dog'' if presented an image of a dog).  The algorithms used to tune the network weights are only concerned with reproducing the output patterns, the network is free to choose how it represents information within the network (i.e., at the hidden layer).
 
 \begin{marginfigure}
-
 \caption{12x12 receptive fields learned from an neural network trained to optimally compress images}
-\includegraphics[width=\linewidth]{figures/learned_receptive_fields}\label{fig:learnedfields}
+\includegraphics[width=\linewidth]{figures/learned_receptive_fields}
+\label{fig:learnedfields}
 \end{marginfigure}
+
 What's super amazing is that we can actually examine the internal representations of a neural network to understand how it's performing the computation from input to output. For instance, Figure~\ref{fig:learnedfields}\footnote{From \href{http://www.cnbc.cmu.edu/~tai/nc19journalclubs/Olshausen-Field-CON-2004-1.pdf}{Sparse coding of sensory inputs}} shows a visualization of the internal representations learned by a network trained to best compress a training set of images (these sorts of networks are called ``auto-encoders'').  The receptive fields of each of the hidden units in the network and can be understood as specifying how each input pixel activates a particular hidden unit (gray corresponds to no activation, black to negative activation, and white to positive activation).  It's remarkable that these receptive fields have coherent structure: they are localized in space, tuned to particular orientations, and tuned to features at a particular scale.  You can think of these as oriented edge detectors that the network learned completely on its own (it was never told to extract edges from the images in the training set).
 
 What's super-duper amazing is that if we compare the receptive fields learned by the artificial neural network to the \href{https://en.wikipedia.org/wiki/Simple_cell}{simple cells} in the primary visual cortex of a cat, there are a number of striking similarities.  Just as in the ANN, the biological neural network responds to edges at particular orientations and scales.  The scientists Hubel and Wiesel performed the pioneering work in neuroscience to establish the properties of receptive fields in the primary visual cortex.  Consider watching \href{https://www.youtube.com/watch?v=8VdFf3egwfg}{a video of their experiment} that eventually garnered a Nobel prize (note that in the video the static sound corresponds to the measurement of spikes in activity of an individual neuron in the brain of an anesthetized cat).\footnote{There are a variety of opinions on the \href{https://en.wikipedia.org/wiki/Animal_testing\#Ethics}{ethics of performing research on animals}}. The implication of the similarity between the receptive fields of the neurons in the cat brain and the virtual neurons in the ANN is that they are similar because they are fundamentally solving the same problem (i.e., efficiently representing visual information).  In this light, that they should find similar solutions to this problem is not as surprising as it may first seem.
@@ -150,7 +152,7 @@ While we'll be talking a lot about how ML can go wrong, unleashing unexpected co
 \item \href{https://www.springboard.com/blog/ai-for-good/}{AI for social good: 7 inspiring examples}
 \item \href{https://medium.com/myplanet-musings/making-the-web-more-accessible-using-machine-learning-8a32eaafdb3a}{Machine Learning for Web Accessibility}
 \item \href{https://fpf.org/wp-content/uploads/2016/03/Final_19Times-Data_Mar2016-1.pdf}{19 Times Data Analysis Empowered Students and Schools}
-\item This one is kind of cheating.  Austin Vesiliza put together \href{https://www.notion.so/ML-for-Good-c0cc352c88b04e719c187c8e4a6f5887}{a list of links to AI for social good projects} that you might use for inspiration.
+\item Austin Veseliza put together \href{https://www.notion.so/ML-for-Good-c0cc352c88b04e719c187c8e4a6f5887}{a list of links to AI for social good projects} that you might use for inspiration.\footnote{Austin created many good things while at Olin, and we wish to remember him in this course.}
 \ei
 
 
