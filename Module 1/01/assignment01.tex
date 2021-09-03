@@ -28,9 +28,11 @@
 \emph{This document contains a lot of external links. They are there to help you learn more if you are interested. You are not required to read/watch all the linked material.}
 
 \section{Please read the syllabus}
-The syllabus is available on Canvas. Please read it, it contains a lot of helpful information. There will be an ungraded competitive game around what's in the syllabus in the next class!
+The syllabus is available on Canvas. Please read it, it contains a lot of helpful information. There will be an ungraded competitive game around what's in the syllabus in the next class! If you have any questions about the syllabus, please post them on the Discord so we can clarify (and practice using Discord as a class). Or if it is a personal question, you can always email us or catch us after class.
 
 \section{Six Big Ideas in Machine Learning}
+\textbf{Note: We suggest you timebox this section to a maximum of 60 minutes to start, including the exercise. Beware of the many interesting rabbit holes that could consume your day. You can always revisit this later.}
+
 Before diving into the specifics of our first machine learning algorithm, let's examine some important ideas in machine learning.  Why six big ideas?  If Rob Martello has taught us anything, it's that all good things come in sixes.
 
 
@@ -179,6 +181,64 @@ There's no one right answer here!
 \ees
 \end{exercise}
 
+\section{High Level Taste of Machine Learning}
+
+We have introduced some really big ideas in machine learning. Now, let's see a quick overview of the categories of machine learning and play around with classification (treating it as a black box for now).  
+
+\begin{exercise}[(10 minutes)]
+Briefly explain the difference between supervised and unsupervised learning and the difference between classification and regression. You can look things up online yourself or check out \href{https://www.youtube.com/watch?v=1FZ0A1QCMWc}{this video} that frames machine learning in 3 categories. If this video isn't working for you (or if you prefer to reading), Mathworks has a decent overview of \href{https://explore.mathworks.com/interactive-machine-learning-with-matlab}{supervised and unsupervised learning} along with some \href{https://www.mathworks.com/videos/series/introduction-to-machine-learning.html?s_tid=srchtitle}{other videos}. 
+
+\begin{boxedsolution}
+\begin{align}
+Supervised learning uses labeled data to find "answers" or make predictions. Unsupervised learning looks for patterns in unlableled data. Classification is for predicting categories or groups, while regression is for predicting numerical values.
+\end{align}
+\end{boxedsolution}
+
+\end{exercise}
+
+
+Now we will play around with a simple example of classification to build some intuition. We'll be using a slight variation on the classic \href{http://archive.ics.uci.edu/ml/datasets/Iris}{Iris Dataset}, which contains 3 types of irises (the flower, not the eye part) and 4 features describing the flowers (lengths and widths of the sepals and petals).
+
+While most of this class will be in Python, we'll be using the Matlab Classification Learner to play around with classification as a black box. To do this, we strongly recommend that you use \href{https://matlab.mathworks.com/}{Matlab Online} (so you don't need to download/update Matlab on your computer or add any toolboxes manually). To get set-up, you should:
+\bi
+\item Go to \href{https://matlab.mathworks.com/}{https://matlab.mathworks.com/}. You will need to log into your Mathworks account (which may be the same as your student login). Check out the \href{https://wikis.olin.edu/it/doku.php?id=matlab}{Olin IT page} for help (or work with a partner if you run into problems... don't let Matlab access suck up a ton of time). 
+\item Get the \href{https://drive.matlab.com/sharing/eabcff70-ad45-4b72-9ccf-d10b3ce20933}{shared data from here.} We suggest you choose Add to My Files in the top left, then add a shortcut. This should allow you to access the nirisData.mat file from Matlab Online. (If that gives you trouble, you can just download it and upload it yourself.)
+
+\ei
+
+\begin{exercise}[(30 minutes)]
+
+\bes 
+\item Explore the Classification Learner with the Iris Dataset. We strongly suggest \href{}{this video to guide you through the steps}, but here are a few notes for your reference:
+\bi
+\item Load the nirisData.mat into your workspace (niris for noisy iris data).
+\item Open the App (see top ribbon) called \textbf{Classification Learner} and start a \textbf{New Session} from the Workspace. 
+\item Set the Data Set Variable to nirisData. This should automatically detect the "Response" variable that refers to the category of flower that you are trying to predict.
+\item Under Validation, be sure to pick \textbf{Resubstitution Validation} so that we get more consistent results. Then hit Start Session.
+\item Play around with the plots by changing the Predictors (also known as "features"). Note what you can observe from these plots (e.g., How well can you tell the different types of flowers apart from these plots? Do some Predictors give more information than others?)
+\item From the dropdown menu in the middle of the top band, select Linear Discriminant and click Train. Congrats, you did machine learning!! Observe the accuracy displayed on the left-hand side. Under the plot on the right-hand side, you can toggle back and forth between the model predictions and the data to see what your model got wrong.
+\ei
+
+\item Train and record the results from at least two models in this \href{https://docs.google.com/spreadsheets/d/1dh4TQbEn25KP0Z0YzHb8IqYpzbTl4e0LC97izIkSEAI/edit?usp=sharing}{classwide spreadsheet}. Be sure to record the details of your design choices so that you can replicate your results in class. Since this is a communal activity, we suggest that you include 1) your model with the highest accuracy and 2) a model with parameters that no one else has recorded yet. Here are some ideas on things you can manipulate:
+\bi
+\item Which features are included in the model (Click Feature Selection in the top ribbon and uncheck some).
+\item Which type of machine learning model you choose (the dropdown menu that includes options like Linear Discriminant and Fine Trees)
+\item Use of PCA to reduce dimensionality or the Advanced button to manipulate features of your model.
+\ei
+\ees
+
+ 
+
+
+\begin{boxedsolution}
+\begin{align}
+Lots of possibilities here. We will talk about this more in class.
+\end{align}
+\end{boxedsolution}
+
+
+\end{exercise}
+
 \section{Mathematical Background}
 
 
@@ -187,7 +247,7 @@ For the purposes of this class, we will be consistent with the notation we use. 
 \end{notice}
 
 \begin{externalresources}[(60 minutes)]
-In order to engage with this assignment, you'll want to make sure you are familiar with the following concepts (links to resources embedded below):
+In order to engage with this and future assignments, you'll want to make sure you are familiar with the following concepts (links to resources embedded below):
 \bi
 \item Vector-vector multiplication
 \bi
@@ -314,7 +374,7 @@ In this class we'll be learning about algorithms using both a top-down and a bot
 \subsection{Linear Regression with One Input Variable: Line of Best Fit}
 If any of what we've said so far sounds familiar, it is likely because you have seen the idea of a line of best fit in some previous class.  To understand more intuitively what the OLS algorithm is doing, we want you to investigate its behavior when there is a single input variable (i.e., you are computing a line of best fit).  
 
-\begin{externalresources}
+\begin{externalresources} [(10 minutes)]
 Use the \href{http://www.shodor.org/interactivate/activities/Regression/}{line of best fit online app} to create some datasets, guess the line of best fit, and then compare the results to the OLS solution (line of best fit).
 
 \begin{exercise}
@@ -342,11 +402,11 @@ This could happen for many reasons.  If the dataset is pieceweise linear (e.g., 
 
 
 \subsection{Linear Regression with Multiple Input Variables: Explorations in Python}
-\begin{externalresources}[(90 minutes)]
-Work through the \href{https://colab.research.google.com/drive/12pLbQkhrPoI-22FVV6gZNObi1IJCW-mF}{Assignment 1 Companion Notebook} to get some practice with {\tt numpy} and explore linear regression using a top-down approach.  You can place your answers directly in the Jupyter notebook so that you have them for your records.
+\begin{externalresources}[(60 minutes)]
+Work through the \href{https://colab.research.google.com/drive/1QPsD2URWupxWjpBfKsr7AcIZ2m3VD37T?usp=sharing}{Assignment 1 Companion Notebook} to get some practice with {\tt numpy} and explore linear regression using a top-down approach.  You can place your answers directly in the Jupyter notebook so that you have them for your records.
 \end{externalresources}
 
-\companionnotebook{Assignment_01_Companion}
+%\companionnotebook{Assignment_01_Companion}
 
 
 \end{document}
