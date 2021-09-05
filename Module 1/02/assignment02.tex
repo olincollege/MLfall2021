@@ -44,10 +44,13 @@ In the last assignment, you saw a high level overview of machine learning broken
 \begin{figure}
 \includegraphics[width=0.6\linewidth]{figures/SupervisedUnsupervisedReinforcement}
 \centering
-\caption{Image from Esma Bozkurt}% https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}
+%\caption{Image from Esma Bozkurt}% https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}
 \centering
 \end{figure}
-\todo[inline]{Sam can't figure out how to get the caption to show up below and include a link to the original medium article.}
+\begin{center}
+Image from Esma Bozkurt \href{https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}{article on medium.com}
+\end{center}
+\todo[inline]{Sam can't figure out how to get the caption to show up below and include a link to the original medium article so faking it, Carrie feel free to fix if it's easy, otherwise this is fine.}
 
 	
 
@@ -258,7 +261,7 @@ $$\left ( \mlmat{A} \mlmat{x}  + \mlmat{y} \right )^\top \left (\mlmat{v} + \mlm
 \mlvec{x}^\top \mlmat{A} \mlvec{x} =& \sum_{i=1}^d\sum_{j=1}^d   x_i  x_j  a_{i, j} &\nonumber \\
 \frac{\partial \mlvec{x}^\top \mlmat{A} \mlvec{x}}{\partial x_k} &= \sum_{i=1}^d\sum_{j=1}^d   a_{i,j} \left ( \frac{\partial{x_i }}{\partial x_k} x_j  +  x_i \frac{\partial{x_j}}{\partial x_k} \right)  & \mbox{apply the \href{https://en.wikipedia.org/wiki/Product_rule}{product rule}} \nonumber \\
  &= \sum_{i=1}^d\sum_{j=1}^d   a_{i,j}  \frac{\partial{x_i }}{\partial x_k} x_j +   \sum_{i=1}^d\sum_{j=1}^d  a_{i,j}  x_i \frac{\partial{x_j}}{\partial x_k} &\mbox{split into two summations} \nonumber \\
-  &= \sum_{j=1}^d   a_{k,j}  x_j +   \sum_{i=1}^d a_{i,k}  x_i  &\mbox{take partials, many terms are 0} \nonumber \\
+  &= \sum_{j=1}^d   a_{k,j}  x_j +   \sum_{i=1}^d a_{i,k}  x_i  &\mbox{take partial derivatives, many terms are 0} \nonumber \\
 &=  \sum_{j=1}^d   a_{k,j}  x_j +   \sum_{i=1}^d a_{k,i}  x_i  & \mbox{$\mlmat{A}$ is symmetric, so $a_{i,j} = a_{j,i}$} \nonumber \\
 &= 2  \sum_{j =1}^d a_{k,j}  x_j & \mbox{the two summations are the same} \nonumber \\
 &= 2 \mathbf{row}_k^\top \mathbf{x} & \mbox{this is the dot product between $\mlvec{x}$ and the $k$th row of $\mlmat{A}$} \nonumber \\
@@ -312,23 +315,25 @@ $$\mlvec{\hat{y}} = \begin{bmatrix} \mlvec{x_1}^\top  \mlvec{w} \\ \mlvec{x_2}^\
 \ees
 \end{exercise}
 
-\section*{Teaming Check-in}
-
-\begin{exercise}[\faShareAlt~(10 minutes)]
-Holy non-sequitur, Batman! We want to check in about working together with your in-class partner (now that you've actually had a chance to work together, but before you start the notebook). There is no expectation that you work together outside of class. For whatever amount of time you work together, we'd like to hear how it went!  Please answer the following questions regarding your in-class experience.
-
-\bes
-\item Did you and your partner work well together?  To help us understand how this better, provide a concrete examples to illustrate what went well and what didn't.  If you want to avoid working with you partner in the future, say so (make sure to include the person's name).  Only use this option in extenuating circumstances.
-\item We are assigning partners as an experiment.  Our rationale for this choice is that finding a partner is potentially stressful and it may be difficult to work with folks you don't normally socialize with.  With this rationale in mind, do you think we should continue to assign class work partners?  Should we tweak this somehow?
-\ees
-
-\end{exercise}
+%\section*{Teaming Check-in}
+%
+%\begin{exercise}[\faShareAlt~(10 minutes)]
+%Holy non-sequitur, Batman! We want to check in about working together with your in-class partner (now that you've actually had a chance to work together, but before you start the notebook). There is no expectation that you work together outside of class. For whatever amount of time you work together, we'd like to hear how it went!  Please answer the following questions regarding your in-class experience.
+%
+%\bes
+%\item Did you and your partner work well together?  To help us understand how this better, provide a concrete examples to illustrate what went well and what didn't.  If you want to avoid working with you partner in the future, say so (make sure to include the person's name).  Only use this option in extenuating circumstances.
+%\item We are assigning partners as an experiment.  Our rationale for this choice is that finding a partner is potentially stressful and it may be difficult to work with folks you don't normally socialize with.  With this rationale in mind, do you think we should continue to assign class work partners?  Should we tweak this somehow?
+%\ees
+%\end{exercise}
 
 \section{Implementation}
 
 Hopefully that wasn't too painful and you learned a few useful tricks along the way.  The good news is that even complex machine learning techniques wind up boiling down to following recipes that look very much like what you just did.
 
-At this point, you'll be taking the derivation of linear regression that you just worked out and using it to implement the linear regression algorithm from scratch in Python (well, you will be using {\tt numpy}).  Along the way we'll show you some sanity checks that you can perform to verify that your implementation is correct and help you to solidify your understanding of the math. Without further ado, let's transition over to the \href{https://colab.research.google.com/github/mlfa19/assignments/blob/master/Module\%201/02/Assignment_02_Companion.ipynb}{Assignment 2 Companion Notebook}.
+\begin{externalresources}[(90 minutes)]
+At this point, you'll be taking the derivation of linear regression that you just worked out and using it to implement the linear regression algorithm from scratch in Python (well, you will be using {\tt numpy}).  Along the way we'll show you some sanity checks that you can perform to verify that your implementation is correct and help you to solidify your understanding of the math. Without further ado, let's transition over to the \href{https://colab.research.google.com/drive/14gBeXCIOkEnL-T-mu4fM4yQJVDy9sw98?usp=sharing}{Assignment 2b Companion Notebook}.
+\end{externalresources}
+
 
 \companionnotebook{Assignment_02_Companion}
 
