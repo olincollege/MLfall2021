@@ -44,11 +44,11 @@ In the last assignment, you saw a high level overview of machine learning broken
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{figures/SupervisedUnsupervisedReinforcement}
 \centering
-\caption{Image from \href{https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}{Esma Bozkurt}}% https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}
+%\caption{Image from \href{https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}{Esma Bozkurt}}% https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}
 \centering
 \end{figure}
 \begin{center}
-%Image from Esma Bozkurt \href{https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}{article on medium.com}
+Image from Esma Bozkurt \href{https://medium.com/analytics-vidhya/introduction-to-machine-learning-regression-5bbf4ed96f40}{article on medium.com}
 \end{center}
 
 
@@ -58,13 +58,12 @@ In the last assignment, you saw a high level overview of machine learning broken
 
 As we (hopefully) learned in the class activity, overfitting our model to our data can lead to diminished results when we apply our model to a new set of data. One of the ways we try to avoid overfitting is by splitting our data into a training and testing set. (In the future, we will talk about another split of the training data called cross-validation, but for now, we won't worry about that.)
 
-%\todo[inline]{Confirm that we won't do cross-validation yet, otherwise delete that sentence.}
 
 \begin{externalresources}[(60 minutes)]
 Work through the \href{https://colab.research.google.com/drive/1d4EvlaSpgGB-hx78Kj2ii5ee7dczW-I5?usp=sharing}{Assignment 2a Companion Notebook} to practice implementing a simple classification algorithm called a decision tree in Python. You can place your answers directly in the Jupyter notebook so that you have them for your records.
 \end{externalresources}
 
-%\todo[inline]{If they will also be introduced to pandas, then we can mention that too.}
+
 
 \section{A Quick Refresher on Linear Regression}
 
@@ -109,7 +108,7 @@ Once we have $\mlvec{w}^\star$, we can predict the unknown output, $y$, for a ne
 Now that we've refreshed ourselves on the basic framing of linear regression, we'll be diving into the mathematics of how to find the vector $\mlvec{w}^\star$ that best fits a particular training set.  The outline of the steps we are going to take to learn this are:
 
 \be
-\item Solve the special case of linear regression with a single input ($d=1$).
+\item Solve the special case of linear regression with a single input ($d=1$, meaning a 1-dimensional feature vector).
 \item Learn some mathematical tricks for manipulating matrices and vectors and computing gradients of functions involving matrices and vectors (these will be useful for solving the general case of linear regression).
 \item Solve the general case of linear regression (where $d$ can be any positive, integer value).
 \ee
