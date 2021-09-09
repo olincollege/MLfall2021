@@ -82,10 +82,11 @@ The penalty term may seem a little arbitrary, but it can be motivated on a conce
 \begin{exercise}[(60 minutes)]
 Derive an expression to compute the optimal weights, $\mathbf{w^\star}$, to the ridge regression problem.
 
-\todo[inline]{Figure out which exercise this is very similar to in the last assignment.}
+%\todo[inline]{Figure out which exercise this is very similar to in the last assignment.}
+% still similar to A2 E5! - Carrie
 Hint 1: This is very, very similar to Assignment 2, Exercise 5. 
 
-Hint 2: If you follow the same steps as you did in exercise 5, you'll arrive at an expression that looks like this (note: $\mathbf{I}_{d \times d}$ is the $d$ by $d$ identity matrix).
+Hint 2: If you follow the same steps as you did in Exercise 5, you'll arrive at an expression that looks like this (note: $\mathbf{I}_{d \times d}$ is the $d$ by $d$ identity matrix).
 
 $$\mathbf{w^\star} = \arg\min_\mathbf{w} \mathbf{w}^\top \mathbf{X}^\top \mathbf{X} \mathbf{w} - 2\mathbf{w}^\top \mathbf{X}^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y} + \lambda \mathbf{w}^\top  \mathbf{I}_{d \times d} \mathbf{w}$$
 
