@@ -112,14 +112,16 @@ Hint 3: to get $\mathbf{w^\star}$, take the gradient, set it to 0 and solve for 
 
 \section{The Classification Problem}
 
-So far in this class we've looked at supervised learning problems where the responses $y_i$ are continuous-valued and the loss function is quadratic ($\ell(y, \hat{y}) = (y-\hat{y})^2$).  This is an example of a regression problem.  There are many times, however, where it is unnatural to frame a problem as a regression.  For instance, it may be the case that $y_i$ does not come from a continuous range but instead can only take on a few different values.  This sort of problem is known as a classification problem.  For instance, you might want to have a system that takes in an image of a person and predicts their identity.  The identity could be thought of as the output, $y_i$, and it would only make sense for $y_i$ to be one of several values (e.g., each value might represent a particular person the system was trained to recognize).  In this assignment you'll learn about a special case of the classification problem known as binary classification (where $y_i$ is either 0 or 1, e.g., a Paul versus Sam recognizer).
+So far in this class we've looked at supervised learning problems including a quick look at classification and a deeper look at regression. In regression, the responses $y_i$ are continuous-valued and the loss function is quadratic ($\ell(y, \hat{y}) = (y-\hat{y})^2$).  There are many times, however, where it is unnatural to frame a problem as a regression.  For instance, it may be the case that $y_i$ does not come from a continuous range but instead can only take on a few different values.  This sort of problem is known as a classification problem.  For instance, you might want to have a system that takes in an image of a person and predicts their identity.  The identity could be thought of as the output, $y_i$, and it would only make sense for $y_i$ to be one of several values (e.g., each value might represent a particular person the system was trained to recognize).  In this next section, you'll learn about a special case of the classification problem known as binary classification (where $y_i$ is either 0 or 1, e.g., a Carrie versus Sam recognizer).
 
-In this assignment we will formalize the binary classification problem and see a very useful algorithm for solving it called \emph{logistic regression}.  You will also see that the logistic regression algorithm is a very natural extension of linear regression.  Our plan for getting there is going to be pretty similar to what we did for linear regression.
+In this class, we will formalize the binary classification problem and see a very useful algorithm for solving it called \emph{logistic regression}.  You will also see that the logistic regression algorithm is a very natural extension of linear regression.  Our plan for getting there is going to be pretty similar to what we did for linear regression.
 \bi
 \item Build some mathematical foundations
 \item Introduce logistic regression from a top-down perspective
 \item Learn about logistic regression from a bottom-up perspective
 \ei
+
+In this assignment, we will focus on building the mathematical foundations.
 
 \section{Formalizing the Classification Problem}
 Let's start by making the binary classification problem more formal.  Suppose, we are given a training set, $(\mlvec{x_1}, y_1), (\mlvec{x_2}, y_2), \ldots, (\mlvec{x_n}, y_n)$, where each $\mlvec{x_i}$ is an element of the input space (e.g., a vector) and each $y_i$ is a binary number (either 1 or 0).  In this setting we will attempt to use the training data to determine a function, $\hat{f}^\star$, that predicts the corresponding output, $y$, for any possible input, $\mathbf{x}$.  For example,  $\mathbf{x}$ could be an image and $y_i$ could be $1$ when the picture contains a puppy and $0$ otherwise.
@@ -223,7 +225,7 @@ Forecaster 2 is better with respect to both loss functions (the losses are, on a
 One entry in the table above is particularly interesting.  In the third row the second forecaster assigned a probability of $0.999$ to it being sunny.  It turned out to rain (boo!!!).  The forecaster was almost certain it would be sunny and it wasn't.  The 0-1 loss of course doesn't capture this at all.  The squared loss seems to assign a fairly large loss.  One might argue, though, that this loss does not fully capture how bad the prediction was (for one thing the loss can never be above 1).  This last observation motivates a third loss function that we can use to evaluate probabilistic predictions: the log loss.
 \vspace{1em}
 \begin{externalresources}[(30 minutes)]
-\url{wiki.fast.ai} has some nice resources on a number of topics.  They have a nice concise writeup that explains the concept of log loss.  We ask that you read about \href{http://nb.mit.edu/f/55213}{log loss on NB} so you can ask questions.  If you want the original page (e.g., to click on the links), you can access the \href{http://wiki.fast.ai/index.php/Log_Loss}{log loss page on wiki.fast.ai}.
+\url{https://towardsdatascience.com/intuition-behind-log-loss-score-4e0c9979680a} has a nice writeup that explains the concept of log loss.  Or you're welcome to search for you own resources about log loss. If you find a nice video, please post it to the Discord so others can enjoy too.
 \begin{exercise}
 Revisit the example from before with the two weather forecasters.  Compute the log loss for each forecaster.  Who makes better predictions according to the log loss?
 \begin{boxedsolution}
