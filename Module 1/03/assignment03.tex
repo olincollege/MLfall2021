@@ -225,7 +225,7 @@ Forecaster 2 is better with respect to both loss functions (the losses are, on a
 One entry in the table above is particularly interesting.  In the third row the second forecaster assigned a probability of $0.999$ to it being sunny.  It turned out to rain (boo!!!).  The forecaster was almost certain it would be sunny and it wasn't.  The 0-1 loss of course doesn't capture this at all.  The squared loss seems to assign a fairly large loss.  One might argue, though, that this loss does not fully capture how bad the prediction was (for one thing the loss can never be above 1).  This last observation motivates a third loss function that we can use to evaluate probabilistic predictions: the log loss.
 \vspace{1em}
 \begin{externalresources}[(30 minutes)]
-\url{https://towardsdatascience.com/intuition-behind-log-loss-score-4e0c9979680a} has a nice writeup that explains the concept of log loss.  Or you're welcome to search for you own resources about log loss. If you find a nice video, please post it to the Discord so others can enjoy too.
+hrefl{https://towardsdatascience.com/intuition-behind-log-loss-score-4e0c9979680a}{Towards Data Science} has a nice writeup that explains the concept of log loss.  Or you're welcome to search for you own resources about log loss. If you find a nice video, please post it to the Discord so others can enjoy too.
 \begin{exercise}
 Revisit the example from before with the two weather forecasters.  Compute the log loss for each forecaster.  Who makes better predictions according to the log loss?
 \begin{boxedsolution}
