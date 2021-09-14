@@ -71,8 +71,11 @@ We also explored three possible loss functions for a model that outputs a probab
 \item \textbf{log loss:} ...
 \ee
 
-\todo[inline]{add some text about log loss}
-
+\todo[inline]{add some text about log los -- carrie has tex comments below} 
+% $-\ln 0.4
+% i think we need the actual log loss equation here, but it wasn't defined explicitly in A3, it's just -\ln (probability value)
+% the towards data science has an equation, is this the one we want to use?
+% https://towardsdatascience.com/intuition-behind-log-loss-score-4e0c9979680a
 \end{recall}
 
 
@@ -84,7 +87,7 @@ Now that you have refreshed on how probabilities can be used as a way of quantif
 As always, we assume we are given a training set of inputs and outputs.  As in linear regression we will assume that each of our inputs is a $d$-dimensional vector $\mathbf{x_i}$ and since we are dealing with binary classification, the outputs, $y_i$, will be binary numbers (indicating whether the input belongs to class 0 or 1).  Our hypothesis functions, $\hat{f}$, output the probability that a given input has an output of 1.  What's cool is that we can borrow a lot of what we did in the last couple of assignments when we learned about linear regression.  In fact, all we're going to do in order to make sure that the output of $\hat{f}$ is between 0 and 1 is pass $\mlvec{w}^\top \mlvec{x}$ through a function that ``squashes'' its input so that it outputs a value between 0 and 1.  This idea is shown graphically in Figure~\ref{fig:graphicaldataflow}.
 
 \begin{marginfigure}
-\includegraphics[width=2in]{figures/linearandlogistic}
+\includegraphics[width=1.8in]{figures/linearandlogistic}
 \caption{Graphical representation of both linear and logistic regression.  The key difference is the application of the squashing function shown in yellow.  \href{https://towardsdatascience.com/building-a-logistic-regression-in-python-301d27367c24}{Original source}.}\label{fig:graphicaldataflow}
 \end{marginfigure}
 To make this intuition concrete, we define each $\hat{f}$ as having the following form (note: this equation looks daunting. We have some tips for interpreting it below).
@@ -274,18 +277,21 @@ You could certainly stop here, but if you plug in $y=0$ and $y=1$ you'll find th
 \end{exercise}
 
 
+
 \subsection{Gradient Descent for Optimization}
 If we were to follow our derivation of linear regression we would set our expression for the gradient to 0 and solve for $\mlvec{w}$.  It turns out this equation will be difficult to solve due to the $\sigma$ function.  Instead, we can use an iterative approach where we start with some initial value for $\mlvec{w}$ (we'll call the initial value $\mlvec{w^0}$, where the superscript corresponds to the iteration number) and iteratively adjust it by moving down the gradient (the gradient represents the direction of fastest increase for our function, therefore, moving along the negative gradient is the direction where the loss is decreasing the fastest).
+
+
 
 \vspace{1em}
 \begin{externalresources}[(45 minutes)]
 There are tons of great resources that explain gradient descent with both math and compelling visuals.
 \bi
 \item Recommended: \href{https://www.youtube.com/watch?v=IHZwWFHWa-w}{Gradient descent, how neural networks learn | Deep learning, chapter 2} (start at 5:20)
-\item An Introduction to Gradient Descent (\href{http://nb.mit.edu/f/55231}{on NB}, \href{https://medium.com/@viveksingh.heritage/an-introduction-to-gradient-descent-54775b55ba4f}{original})
-\item The Wikipedia page on Gradient Descent (\href{http://nb.mit.edu/f/55232}{on NB}, \href{https://en.wikipedia.org/wiki/Gradient_descent}{original})
+\item  \href{https://medium.com/@viveksingh.heritage/an-introduction-to-gradient-descent-54775b55ba4f}{An Introduction to Gradient Descent}
+\item \href{https://en.wikipedia.org/wiki/Gradient_descent}{The Wikipedia page on Gradient Descent}
 \item \href{https://www.youtube.com/watch?v=fPSPdTjINi0}{Ahmet Sacan's video on gradient descent} (this one has some extra stuff, but it's pretty clearly explained).
-\item There are quite a few resources out there, do you have some suggestions? (suggest so on NB)
+\item There are quite a few resources out there, do you have some suggestions? (suggest so on Discord)
 \ei 
 \end{externalresources}
 
