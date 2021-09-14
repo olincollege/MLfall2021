@@ -22,16 +22,15 @@
 \bi
 \item Learn about the logistic regression algorithm.
 \item Learn about gradient descent for optimization.
-\item Contemplate an application of machine learning.
+\item Contemplate an application of machine learning for home loans.
 \ei
 \end{learningobjectives}
-
-\todo[inline]{Change Contemplate an application of machine learning. to some more appropraite learning objective based on whatever we assign them to watch.}
 
 \begin{priorknowledge}
 \bi
 \item Supervised learning problem framing.
-\item Log loss
+\item Calculating gradients.
+\item Log loss.
 
 \ei
 \end{priorknowledge}
@@ -49,7 +48,7 @@
 
 \section{Logistic Regression (top-down)}
 
-In the last part of the \href{}{notebook that you started in class}, you saw a quick implementation of logistic regression to classify if a person was looking to the left or to the right. 
+In the last part of the \href{https://colab.research.google.com/drive/1AOUbSKhEvoSTzu_UNm-kq1SBrmmXPHVl?usp=sharing}{notebook that you started in class}, you saw a quick implementation of logistic regression to classify if a person was looking to the left or to the right. 
 
 In this assignment we will formalize the binary classification problem and dig the theory behind \emph{logistic regression}.  You will also see that the logistic regression algorithm is a very natural extension of linear regression.  Our plan for getting there is going to be pretty similar to what we did for linear regression.
 \bi
@@ -63,15 +62,20 @@ In this assignment we will formalize the binary classification problem and dig t
 \begin{recall}
 In the last assignment, you were introduced to the idea of binary classification, which based on some input $\mlvec{x}$ has a corresponding output $y$ that is $y= 0$ or $y= 1$. In logistic regression, this model, $\hat{f}$, instead of spitting out either 0 or 1, outputs a confidence that the input $\mlvec{x}$ has an output $y= 1$.  In other words, rather than giving us its best guess (0 or 1), the classifier indicates to us its degree of certainty regarding its prediction as a probability.
 
-We also explored three possible loss functions for a model that outputs a probability $p$ when supplied with an input $\mlvec{x}$ (i.e., $\hat{f}(\mlvec{x}) = p$). The loss function is used to quantify how bad a prediction $p$ is given the actual output $y$ (for binary classification the output is either $0$ or $1$).
+We also explored three possible loss functions for a model that outputs a probability $p$ when supplied with an input $\mlvec{x}$ (i.e., $\hat{f}(\mlvec{x})=p$). The loss function is used to quantify how bad a prediction $p$ is given the actual output $y$ (for binary classification the output is either $0$ or $1$).
 
 \be
 \item \textbf{0-1 loss:} This is an all-or-nothing approach. If the prediction is correct, the loss is zero; if the prediction is incorrect, the loss is 1. This does not take into account the level certainty expressed by the probability (the model gets the same loss if $y = 1$ and it predicted $p = 0.51$ or $p = 1$).
 \item \textbf{squared loss:}  For squared loss we compute the difference between the outcome and $p$ and square it to arrive at the loss.  For example, if $y = 1$ and the model predicts $p = 0.51$, the loss is $(1 - 0.51)^2$.  If instead $y = 0$, the loss is $(0 - 0.51)^2$.
-\item \textbf{log loss:} ...
+\item \textbf{log loss:} The log loss also penalizes based on the difference between the outcome and $p$, using the formula below.
+\begin{align}
+ logloss = -\frac{1}{N}\sum_{i=1}^n ( (y_i) \ln (p_i) + (1-y_i) \ln (1 - p_i) )\label{eq:loglosseq}
+\end{align}
+Since $y_i$ is always 0 or 1, we will essentially switch between the two chunks of this equation based on the true value of $y_i$. As the predicted probability, $p_i$ (which is constrained between 0 an 1) gets farther from $y_i$, the log-loss value increases.
+
 \ee
 
-\todo[inline]{add some text about log loss}
+
 
 \end{recall}
 
@@ -84,8 +88,9 @@ Now that you have refreshed on how probabilities can be used as a way of quantif
 As always, we assume we are given a training set of inputs and outputs.  As in linear regression we will assume that each of our inputs is a $d$-dimensional vector $\mathbf{x_i}$ and since we are dealing with binary classification, the outputs, $y_i$, will be binary numbers (indicating whether the input belongs to class 0 or 1).  Our hypothesis functions, $\hat{f}$, output the probability that a given input has an output of 1.  What's cool is that we can borrow a lot of what we did in the last couple of assignments when we learned about linear regression.  In fact, all we're going to do in order to make sure that the output of $\hat{f}$ is between 0 and 1 is pass $\mlvec{w}^\top \mlvec{x}$ through a function that ``squashes'' its input so that it outputs a value between 0 and 1.  This idea is shown graphically in Figure~\ref{fig:graphicaldataflow}.
 
 \begin{marginfigure}
-\includegraphics[width=2in]{figures/linearandlogistic}
+\includegraphics[height=2in]{figures/linearandlogistic}
 \caption{Graphical representation of both linear and logistic regression.  The key difference is the application of the squashing function shown in yellow.  \href{https://towardsdatascience.com/building-a-logistic-regression-in-python-301d27367c24}{Original source}.}\label{fig:graphicaldataflow}
+
 \end{marginfigure}
 To make this intuition concrete, we define each $\hat{f}$ as having the following form (note: this equation looks daunting. We have some tips for interpreting it below).
 
@@ -116,22 +121,22 @@ Here are a few things to notice about this equation:
 %\end{externalresources}
 
 \section{Deriving the Logistic Regression Learning Rule}
-Let's summarize what we've done thus far in this assignment.
+%Let's summarize what we've done thus far in this assignment.
 
-\bi
-\item We motivated the binary classification problem.
-\item We presented a particular useful loss function (log loss).
-\item We met the logistic regression model and tried it out on a real dataset.
-\ei
+%\bi
+%\item We motivated the binary classification problem.
+%\item We presented a particular useful loss function (log loss).
+%\item We met the logistic regression model and tried it out on a real dataset.
+%\ei
 
-Next, we're going to build on these pieces and formalize the logistic regression problem and derive a learning rule to solve it (i.e., compute the optimal weights). The formalization of logistic regression will combine Equation~\ref{eq:logistichypothesis} with the selection of $\ell$ to be log loss.  This choice of $\ell$ results in the following objective function.
+Now we will formalize the logistic regression problem and derive a learning rule to solve it (i.e., compute the optimal weights). The formalization of logistic regression will combine Equation~\ref{eq:logistichypothesis} with the selection of $\ell$ to be log loss (Equation~\ref{eq:loglosseq}).  This choice of $\ell$ results in the following objective function.
 
 \begin{align}
 \mlvec{w}^\star &= \argmin_{\mlvec{w}} \sum_{i=1}^n \left ( - y_i \ln \sigma(\mlvec{w}^\top \mlvec{x_i}) - (1-y_i) \ln (1 - \sigma(\mlvec{w}^\top \mlvec{x_i}) ) \right) \\
 &= \argmin_{\mlvec{w}} \sum_{i=1}^n \left (  - y_i \ln \left ( \frac{1}{1+e^{-\mlvec{w}^\top \mlvec{x_i}}} \right) - (1-y_i) \ln  \left (1 - \frac{1}{1+e^{-\mlvec{w}^\top \mlvec{x_i}}} \right ) \right) &\mbox{expanded out if you prefer this form} \label{eq:objective}
 \end{align}
 
-While this looks a bit crazy, since $y_i$ is either 0 or 1, the multiplication of the expressions in the summation by either $y_i$ or $1-y_i$ are essentially acting like a switch---depending on the value of $y_i$ we either get one term or the other.  Our typical recipe for finding $\mlvec{w}^\star$ has been to take the gradient of the expression inside the $\argmin$, set it to $0$, and solve for $\mlvec{w}^\star$ (which will be a critical point and hopefully a minimum).  The last two steps will be a bit different for reasons that will become clear soon, but we will need to find the gradient.  We will focus on finding the gradient in the next couple of parts.
+While this looks a bit intense, since $y_i$ is either 0 or 1, the multiplication of the expressions in the summation by either $y_i$ or $1-y_i$ are essentially acting like a switch---depending on the value of $y_i$ we either get one term or the other.  Our typical recipe for finding $\mlvec{w}^\star$ has been to take the gradient of the expression inside the $\argmin$, set it to $0$, and solve for $\mlvec{w}^\star$ (which will be a critical point and hopefully a minimum).  The last two steps will be a bit different for reasons that will become clear soon, but we will need to find the gradient.  We will focus on finding the gradient in the next couple of parts.
 
 \subsection{Useful Properties of the Sigmoid Function}
 
@@ -282,10 +287,10 @@ If we were to follow our derivation of linear regression we would set our expres
 There are tons of great resources that explain gradient descent with both math and compelling visuals.
 \bi
 \item Recommended: \href{https://www.youtube.com/watch?v=IHZwWFHWa-w}{Gradient descent, how neural networks learn | Deep learning, chapter 2} (start at 5:20)
-\item An Introduction to Gradient Descent (\href{http://nb.mit.edu/f/55231}{on NB}, \href{https://medium.com/@viveksingh.heritage/an-introduction-to-gradient-descent-54775b55ba4f}{original})
-\item The Wikipedia page on Gradient Descent (\href{http://nb.mit.edu/f/55232}{on NB}, \href{https://en.wikipedia.org/wiki/Gradient_descent}{original})
+\item \href{https://medium.com/@viveksingh.heritage/an-introduction-to-gradient-descent-54775b55ba4f}{An Introduction to Gradient Descent}
+\item \href{https://en.wikipedia.org/wiki/Gradient_descent}{The Wikipedia page on Gradient Descent}
 \item \href{https://www.youtube.com/watch?v=fPSPdTjINi0}{Ahmet Sacan's video on gradient descent} (this one has some extra stuff, but it's pretty clearly explained).
-\item There are quite a few resources out there, do you have some suggestions? (suggest so on NB)
+\item There are quite a few resources out there, do you have some suggestions? (suggest so on Discord)
 \ei 
 \end{externalresources}
 
@@ -317,7 +322,7 @@ False, the best gradient descent can do, in general, is converge to a local mini
 If we take the logic of gradient descent and apply it to the logistic regression problem, we arrive at the following learning rule.  Given some initial weights $\mlvec{w^0}$, and a learning rate $\eta$, we can iteratively update our weights using the formula below.
 
 \begin{align}
-\mlvec{w^{n+1}} &= \mlvec{w^n} - \eta \sum_{i=1}^n  -(y_i - \sigma(\mlvec{w}^\top \mlvec{x_i})) \mlvec{x_i} ~~~\mbox{applying the result from exercise 4} \\
+\mlvec{w^{n+1}} &= \mlvec{w^n} - \eta \sum_{i=1}^n  -(y_i - \sigma(\mlvec{w}^\top \mlvec{x_i})) \mlvec{x_i} ~~~\mbox{applying the result from exercise 2} \\
 &=  \mlvec{w^n} + \eta \sum_{i=1}^n  (y_i - \sigma(\mlvec{w}^\top \mlvec{x_i})) \mlvec{x_i}  ~~~\mbox{distribute the negative}
 \end{align}
 
@@ -341,18 +346,19 @@ You are also welcome to implement logistic regression using gradient descent if 
 
 As we mentioned in the introduction to the course, we'll be exploring machine learning from three different perspectives: the theory, the implementation, and the context, impact, and ethics. 
 
-\todo[inline]{insert image from syllabus slides on theory implementation and context}
+\includegraphics[height=2in]{figures/ternaryTIE}
 
 Lately, we've been diving deeply into the mathematical theory with some touch points in implementation and context. Here, we want to take a moment to zoom out (with a lowercase z), and think about how algorithms interact with society, individuals, and institutions. 
 
-\todo[inline]{one option, carrie is only 45 min into it and felt like it started strong but lost the plot, not sure I have another 1.5 hours to watch another}
-We are going to take a virtual field trip to a leading conference on this topic! In normal times it would be challenging and expensive for us to bring the entire class to this conference, but thanks to the pandemic we can easily share one of the talks from the Conference on Fairness, Accountability, and Transparency with you. 
+%\todo[inline]{one option, carrie is only 45 min into it and felt like it started strong but lost the plot, not sure I have another 1.5 hours to watch another}
+%We are going to take a virtual field trip to a leading conference on this topic! In normal times it would be challenging and expensive for us to bring the entire class to this conference, but thanks to the pandemic we can easily share one of the talks from the Conference on Fairness, Accountability, and Transparency with you. 
+%
+%\begin{exercise}
+%Please watch \href{https://www.youtube.com/watch?v=rSOZhv4bqQU&list=PLXA0IWa3BpHnYVwSLuvv1Jv1U1Pyhcymt&index=8}{this talk} and take notes. 
+%\end{exercise}
+%
+%\todo[inline]{Or, option 2-- Carrie likes this one better, and it's closer to an hour. I'm not sure it captures the magic Sam was looking for.}
 
-\begin{exercise}
-Please watch \href{https://www.youtube.com/watch?v=rSOZhv4bqQU&list=PLXA0IWa3BpHnYVwSLuvv1Jv1U1Pyhcymt&index=8}{this talk} and take notes. 
-\end{exercise}
-
-\todo[inline]{Or, option 2-- Carrie likes this one better, and it's closer to an hour. I'm not sure it captures the magic Sam was looking for.}
 Machine learning governs how people can access wealth-building tools, like loans and mortgages.
 Please read \href{https://www.nytimes.com/2020/09/18/business/digital-mortgages.html}{this article on algorithms preventing bias in home loans.} Then watch \href{https://www.ted.com/talks/shivani_siroya_a_smart_loan_for_people_with_no_credit_history_yet/up-next?language=en}{this TED talk} about a way to build credit history.
 \begin{exercise}
