@@ -111,7 +111,7 @@ There are three different logistic regression models represented.  There is one 
 \end{exercise}
 
 \begin{exercise}[(30 minutes)]
-Without using any training data (this is testing your understanding of the model itself), determine reasonable values for the weights in this network ($w^{(1)}_{1,1}, w^{(1)}_{1,2}, w^{(1)}_{1,3}, w^{(1)}_{2,1}, w^{(1)}_{2,2}, w^{(1)}_{2,3}, w^{(2)}_{1,1}, w^{(2)}_{1,2}, w^{(2)}_{1,3}$) such that the MLP has the following behavior.  Recall that $x^{(1)}_1$ is the passenger's age, $x^{(1)}_2$ is a binary variable that is 1 if the passenger is male and 0 if female, $x^{(1)}_3$ and $x^{(2)}_3$ are always 1.
+For each of the 3 behavors described below (questions a, b, and c), determine reasonable values for the weights in this network ($w^{(1)}_{1,1}, w^{(1)}_{1,2}, w^{(1)}_{1,3}, w^{(1)}_{2,1}, w^{(1)}_{2,2}, w^{(1)}_{2,3}, w^{(2)}_{1,1}, w^{(2)}_{1,2}, w^{(2)}_{1,3}$) so that the MLP behaves as described. You will not need to use any training data except general knowledge that a person's reported sex is recorded as 0 or 1 and age is within a set of reasonable numbers (this question is about testing your understanding of the model itself).  Recall that $x^{(1)}_1$ is the passenger's age, $x^{(1)}_2$ is a binary variable that is 1 if the passenger is male and 0 if female, $x^{(1)}_3$ and $x^{(2)}_3$ are always 1.
 \bes
 \item $x^{(2)}_1$ encodes whether or not the passenger is female (i.e., it should take a value close to 1 when the passenger is female and close to 0 when the passenger is male).
 \begin{boxedsolution}
@@ -147,7 +147,7 @@ If we were to write out the MLP example in the previous section using this notat
 
 
 \begin{externalresources}[(20 minutes)]
-This HMC calculus tutorials explain the concept of the chain rule using dataflow diagrams beautifully.  Go and read the \href{https://www.math.hmc.edu/calculus/tutorials/multichainrule/}{HMC Multivariable Chain Rule Page} and come back for some exercises to test your understanding.
+This Harvey Mudd College calculus tutorials explain the concept of the chain rule using dataflow diagrams beautifully.  Go and read the \href{https://math.hmc.edu/calculus/hmc-mathematics-calculus-online-tutorials/multivariable-calculus/multi-variable-chain-rule/}{HMC Multivariable Chain Rule Page} and come back for some exercises to test your understanding.
 \end{externalresources}
 
 \begin{exercise}[(20 minutes)]
