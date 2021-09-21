@@ -49,22 +49,15 @@ Here are some things we'll be utilizing in this assignment.  When appropriate, w
 
 \section{Motivation for Neural Networks}
 
-
-\todo[inline]{Redo this motivation, as they have not seen Titanic and we didn't give them the walk-through in the same way}
-In order to motivate the idea of neural networks, we'll be examining the Titanic Kaggle dataset.  If you didn't work with this data, it might help you to briefly skim \href{https://colab.research.google.com/github/mlfa19/assignments/blob/master/Module\%201/05/assignment05.ipynb#scrollTo=56C4fPtK7YeQ}{the walkthrough in assignment 5}.
-
-In order to motivate the idea of neural networks, we'll be examining the Titanic Kaggle dataset. 
-\todo{oh no, I've messed up the careful flow of the class by switching datasets in the last homework!}
-
+In order to motivate the idea of neural networks, we'll be examining the \href{https://www.kaggle.com/c/titanic}{Titanic Dataset from Kaggle}. This dataset is commonly used in machine learning examples. We'll just be taking a quick look at it, using only two traits to try to predict whether or not someone survived the shipwreck.
 
 \vspace{1em}
 \begin{externalresources}[(45 minutes)]
-Go through the \href{https://colab.research.google.com/github/mlfa19/assignments/blob/master/Module\%201/06/Assignment_6_Companion.ipynb}{Assignment 6 Companion notebook}.
+Go through the \href{https://colab.research.google.com/drive/137d9N0jnsVqlKIwDFUy3zauIXx9UDIOr?usp=sharing}{Assignment 6 Companion notebook}.
 \end{externalresources}
 
 \section{Our First Neural Network: the Multilayer Perceptron (MLP)}
 
-\todo[inline]{go through and fix all the titanic references to age and sex unless we also introduce them to the dataset}
 Now that you've seen a neural network in action, we'll be digging into how a neural network works.  The presentation will be specific to a particular type of neural network that we used in the companion notebook known as a multilayer perceptron (MLP), but the main ideas generalize to many other types of networks.
 
 Thinking back to the companion notebook, we observed that the features in the original dataset ({\tt age} and {\tt sex}) were not conducive to predicting whether someone would survive.  We showed that by augmenting the input features with a column called {\tt is young male} that captured whether or not a person was young \emph{and} male, that the algorithm could effectively learn the task.  The fundamental idea of a neural network is that the network automatically constructs useful representations of the input data \emph{as a part of the learning process}.
@@ -76,13 +69,12 @@ Graphically we can contrast these approaches in the following way.  First we'll 
 Notice how we had to manually introduce the feature {\tt is young male} in order for the logistic regression model to utilize it to make its prediction.  Before giving you the equivalent figure for the multi-layer perceptron, let's look at a little bit more cartoonish version of the multi-layer perceptron.  This version will leave off the math and the particular notation we are using.  Once you have a good sense of what this is, you can look at the more precise version which is to follow.
 
 
-\begin{externalresources}{(optional if what we give you below is not clicking)}
+\begin{externalresources}{(optional)}
 Here are some additional resources that explain the concept of a multi-layer perceptron.  If the explanations we give below are not working for you, consider checking out some of these.  \textbf{You do not need to consult these resources if you feel like our explanations are working well for you.}
 \bi
 \item 3blue1brown \href{https://www.youtube.com/watch?v=aircAruvnKk&t=6s}{What is a neural network?} 
 \item 3blue1brown video \href{https://www.youtube.com/watch?v=IHZwWFHWa-w&list=PL_h2yd2CGtBHEKwEH5iqTZH85wLS-eUzv&index=2}{How neural networks learn?}
 \item 3blue1brown \href{https://www.youtube.com/watch?v=Ilg3gGewQ5U}{Backpropagation}
-\item Please add your own links on the Discord chat.
 \ei
 \end{externalresources}
 
@@ -92,9 +84,9 @@ Input data (in this case we just use age, male, and a bias term) are propagated 
 
 Next, let's make this cartoon picture concrete.  We'll use the following notation.
 \bi
-\item $x^{(j)}_i$ will refer to the $i$th unit in the $j$th layer of the network ($j=1$ will correspond to the inputs, $j=2$ will correspond to the hidden representations, and $j=3$ will correspond to the output).  For instance, in the figure above the circle labeled \emph{male} would be $x^{(1)}_2$, \emph{hidden repr. 1} would be $x^{(2)}_1$ and \emph{prob survived} would be $x^{(3)}_1$.
-\item $s^{(j)}_i$ will refer to the $i$th summation unit in the $j$th layer of the network (as before, $j=1$ will correspond to the inputs, $j=2$ will correspond to the hidden representations, and $j=3$ will correspond to the output).  The summation unit will play a similar role to $s$ in the logistic regression figure.
-\item $w^{(j)}_{i,k}$ will refer to the weight of the connection between the the $k$th unit in layer $j$ and the $i$th unit in layer $j+1$.
+\item $x^{(k)}_i$ will refer to the $i$th unit in the $k$th layer of the network ($k=1$ will correspond to the inputs, $k=2$ will correspond to the hidden representations, and $k=3$ will correspond to the output).  For instance, in the figure above the circle labeled \emph{male} would be $x^{(1)}_2$, \emph{hidden repr. 1} would be $x^{(2)}_1$ and \emph{prob survived} would be $x^{(3)}_1$.
+\item $s^{(k)}_i$ will refer to the $i$th summation unit in the $k$th layer of the network (as before, $k=1$ will correspond to the inputs, $k=2$ will correspond to the hidden representations, and $k=3$ will correspond to the output).  The summation unit will play a similar role to $s$ in the logistic regression figure.
+\item $w^{(k)}_{i,j}$ will refer to the weight of the connection between the the $j$th unit in layer $k$ and the $i$th unit in layer $k+1$.
 \ei
 
 \begin{notice}
@@ -352,7 +344,7 @@ If you'd like to take this material farther, here are some suggestions. We do no
 \item Make sure your implementation is correct by comparing the numerical approximation of the gradient to the gradient you calculated with the backpropagation algorithm.
 \ei
 
-\companionnotebook{Assignment_6_Companion}
+%\companionnotebook{Assignment_6_Companion}
 
 
 \end{document}
