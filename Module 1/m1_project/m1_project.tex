@@ -9,7 +9,7 @@
 
 \title{Module 1 Project: Computer Vision Application}
 \author{Machine Learning}
-\date{Fall 2019}
+\date{Fall 2021}
 
 \begin{document}
 
@@ -29,29 +29,76 @@ Computer vision and image classification tools are rapidly reshaping how we live
 
 \section*{Goal-Setting and Customization}
 
-You will be considering your own learning goals for this project, as well as the learning goals of your teammate(s) (if applicable). You can customize this project to support your own learning, and we are happy to help you shape the project to support your goals and challenge yourself. 
+You will be considering your own learning goals for this project, as well as the learning goals of your teammate(s) (if applicable).
+\todo{will we encourage pairs?- update here.}
+ You can customize this project to support your own learning, and we are happy to help you shape the project to support your goals and challenge yourself. 
 
 \section*{Project Description}
 In this project, you will contemplate a potential application for computer vision (machine learning of images) and you will implement a machine learning algorithm on a data set in support of this application. As part of this project, you will:
 \bi[leftmargin=.5in]
 \item Document the important considerations for your application (e.g., what data are available for training, how well would the algorithm need to work to create value, how could the algorithm and application be tested (beyond the testing you choose to implement), what are the implications of this application in the world, what are the stakeholders, what are the risks). 
 \item Build and iterate on a computer vision model as a step toward this application. We don’t expect you to build the entire application, just to work toward implementing an early version of an algorithm that could be used for this application. It’s likely that you will use a convolutional neural network, but not required. You will build and test multiple versions of your model.
-\item Visualize key aspects of your data/model. Include at least two visualizations in your report, but you’ll probably find it valuable to visualize various aspects of the data and model (this is helpful in sanity checking and can give good insight into how the model is working). 
+\todo{can they use libraries or is this from scratch-- update here.}
+\item Visualize key aspects of your data/model. Include at least two visualizations in your report. You’ll probably find it valuable to visualize many aspects of the data and model as you work. This is helpful in sanity checking and can give good insight into how the model is working.
 \item Test and evaluate your model. This will likely include accuracy on training and test sets. Depending on your application, you may also want to collect your own photos, find other images online, and/or manipulate images from your original test set (adding noise, shifting/flipping images, etc). You will also evaluate the effectiveness of this model for your specific application and describe the limitations of your current model and data.
 \item Document your final analysis pipeline for transparency. (A simplified version that does not need to include every parameter, visualization, or tweak that you tried.)
 \ei
+
+\section*{Rubric}
+\todo{Let's add in a rubric with specific evaluative points. I like grading on a 0-3 scale, but am open to other things.}
+
+Please submit a Jupyter Notebook to Canvas. We suggest you work in the Google CoLab environment (like you have for the assignments). When you are ready to submit, please download your notebook as an ipynb file, and submit that to Canvas. 
+
+Your project will be graded on the following aspects. Each item is worth 3 points.
+
+
+\subsection{General}
+\begin{enumerate}
+\item The notebook is well-organized.
+\item The notebook balances code and text well.
+\item The notebook runs without errors in the Google CoLab environment.
+\item The notebook is free of typos.
+\item The notebook demonstrates good coding practices, including but not limited to docstrings, appropriate variable names, and comments as appropriate.
+\item The code demonstrates a significant amount of effort (roughly 3 assignments'
+  worth), made clear by careful consideration of the data, model, and implications for the model you developed.
+\end{enumerate}
+
+\subsection{Motivation}
+\begin{enumerate}[resume]
+\item It is clear what data you used.
+\item The application of your algorithm is clear, and well-motivated.
+\item The notebook explains how well the algorithm would need to work to provide value
+\item The notebook explains how the algorithm is to be evaluated (how do you know it is working well?)
+\item The notebook explains the implications of this approach (including risks and stakeholders)
+\end{enumerate}
+
+\subsection{Implementation}
+\begin{enumerate}[resume]
+\item The algorithm is evaluated numerically.
+\item The evaluation of the model is implemented correctly.
+\item The notebook explains the dataset and the features, in text and/or graphics.
+\item The notebook contains a computer vision model.
+\item The computer vision model is implemented correctly.
+\item There is evidence that iteration has occurred in the model (this can be in the text).
+\end{enumerate}
+
+\subsection{Conclusion}
+\begin{enumerate}[resume]
+\item The notebook accurately describes the effectiveness of the model in text.
+\item The notebook describes the limitations of the model.
+\item The code generates two visualizations of the data.
+\end{enumerate}
+
 
 \section*{Resources}
 \bi
 \item Interactive visualization for considerations in your application: \href{https://www.cdt.info/ddtool/}{https://www.cdt.info/ddtool/}. The background for this visualization is here: \href{https://cdt.org/issue/privacy-data/digital-decisions/} {https://cdt.org/issue/privacy-data/digital-decisions/} 
 \item FAT ML principles for accountable algorithms (from the first day of class): \href{https://www.fatml.org/resources/principles-for-accountable-algorithms}{https://www.fatml.org/resources/principles-for-accountable-algorithms}
-\item Suggested questions to consider about your application in Appendix A.
-\item Suggested data sets in Appendix B and \href{https://www.notion.so/Entry-Level-Computer-Vision-Datasets-cc6fb53f51324779b29e26337642a649}{here}
 \ei
 
 
 \section*{Appendix A: Some questions to consider}
-\href{https://www.notion.so/ANN-Project-Framing-76e1b6af347f475a983487996ac9760d}{source}
+\href{https://www.notion.so/ANN-Project-Framing-76e1b6af347f475a983487996ac9760d}{These questions are taken from this webpage.}
 \bi
 \item What do you want your model to be able to do?
 \item How can you imagine your model (or an extension of it) being used in the real world? Feel free to get creative.
@@ -68,44 +115,47 @@ In this project, you will contemplate a potential application for computer visio
 
 \section*{Appendix B: Computer Vision Datasets}
 \subsection*{PyTorch built-in datasets}\label{pytorch-built-in-datasets}
+\todo{Many links are broken, I've commented them out but we should find them}
 
-\bi
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#torchvision.datasets.CIFAR10}{CIFAR-10}:
-  60,000 labeled 32x32 color images of 10 classes of objects
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#torchvision.datasets.CIFAR100}{CIFAR-100}:
-  60,000 labeled 32x32 color images of 100 fine classes of objects, also
-  grouped into 20 course superclasses
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#emnist}{EMNIST}:
-  800,000 labeled 28x28 grayscale images of handwritten digits and
-  letters (uppercase and lowercase) that expand the MNIST dataset
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#fashion-mnist}{Fashion-MNIST}:
-  70,000 labeled 28x28 grayscale images of 10 classes of clothing
-  articles
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#imagenet}{ImageNet
-  2012}: 1,331,167 labeled color images of tens of thousands of classes
-  of nouns in the WordNet hierarchy
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#kmnist}{KMNIST}:
-  70,000 labeled 28x28 grayscale images of 10 classes of handwritten
-  Japanese Hiragana characters
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#lsun}{LSUN}:
-  708,564 labeled large-scale color images of 10 classes of
-  scenes/settings
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#mnist}{MNIST}:
-  70,000 labeled 28x28 grayscale images of 10 classes of handwritten
-  digits
-\item
-  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#svhn}{SVHN}:
-  Color images of house numbers (addresses) obtained from Google Street
-  View w/ labeled bounding boxes around individual digits
-\ei
+%\bi
+%\tem
+%\href{https://www.notion.so/Entry-Level-Computer-Vision-Datasets-cc6fb53f51324779b29e26337642a649}{Entry-Level Computer Vision Datasets}
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#torchvision.datasets.CIFAR10}{CIFAR-10}:
+%  60,000 labeled 32x32 color images of 10 classes of objects
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#torchvision.datasets.CIFAR100}{CIFAR-100}:
+%  60,000 labeled 32x32 color images of 100 fine classes of objects, also
+%  grouped into 20 course superclasses
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#emnist}{EMNIST}:
+%  800,000 labeled 28x28 grayscale images of handwritten digits and
+%  letters (uppercase and lowercase) that expand the MNIST dataset
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#fashion-mnist}{Fashion-MNIST}:
+%  70,000 labeled 28x28 grayscale images of 10 classes of clothing
+%  articles
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#imagenet}{ImageNet
+%  2012}: 1,331,167 labeled color images of tens of thousands of classes
+%  of nouns in the WordNet hierarchy
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#kmnist}{KMNIST}:
+%  70,000 labeled 28x28 grayscale images of 10 classes of handwritten
+%  Japanese Hiragana characters
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#lsun}{LSUN}:
+%  708,564 labeled large-scale color images of 10 classes of
+%  scenes/settings
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#mnist}{MNIST}:
+%  70,000 labeled 28x28 grayscale images of 10 classes of handwritten
+%  digits
+%\item
+%  \href{https://pytorch.org/docs/stable/torchvision/datasets.html\#svhn}{SVHN}:
+%  Color images of house numbers (addresses) obtained from Google Street
+%  View w/ labeled bounding boxes around individual digits
+%\ei
 
 \subsection*{TensorFlow built-in}\label{tensorflow-built-in-datasets}
 
@@ -239,12 +289,12 @@ TF
 \item
   \href{http://www.vision.caltech.edu/Image_Datasets/Caltech256/}{Caltech
   256}: 30,607 labeled color images of 256 classes of objects
-\item
-  \href{https://dataturks.com/projects/dominique.paul.info/cars2}{CARS}:
-  604 labeled color images with either cars or no cars
-\item
-  \href{http://www.jdl.ac.cn/peal/index.html}{CAS-PEAL-R1}: 30,900
-  labeled grayscale images of 1,040 faces (exclusively Chinese)
+%\item
+ % \href{https://dataturks.com/projects/dominique.paul.info/cars2}{CARS}:
+ % 604 labeled color images with either cars or no cars
+%\item
+ % \href{http://www.jdl.ac.cn/peal/index.html}{CAS-PEAL-R1}: 30,900
+ % labeled grayscale images of 1,040 faces (exclusively Chinese)
 \item
   \href{https://github.com/detectRecog/CCPD}{CCPD}: 300,000 labeled
   color images of license plates w/ bounding boxes, license plate
@@ -253,28 +303,28 @@ TF
   \href{https://github.com/BayesWatch/cinic-10}{CINIC-10}: A drop-in
   replacement for CIFAR-10 with 270,000 images collected by downsampling
   images from ImageNet
-\item
-  \href{https://dataturks.com/projects/miaozh17/Crack\%20Classification}{CRACK}:
-  1,428 labeled 299x299 color images with either cracks or no cracks
-\item
-  \href{https://cyberextruder.com/face-matching-data-set-download/}{CyberExtruder
-  Ultimate Face Matching Dataset}: 10,205 labeled 600x600 color images
-  of 1000 faces scraped from the internet
+%\item
+ % \href{https://dataturks.com/projects/miaozh17/Crack\%20Classification}{CRACK}:
+%  1,428 labeled 299x299 color images with either cracks or no cracks
+%\item
+ % \href{https://cyberextruder.com/face-matching-data-set-download/}{CyberExtruder
+%  Ultimate Face Matching Dataset}: 10,205 labeled 600x600 color images
+ % of 1000 faces scraped from the internet
 \item
   \href{http://iab-rubric.org/resources/dfw.html}{DFW}: 11,157 labeled
   color images of 1000 subjects' faces, including examples of that
   subject attempting to obfuscate their face and of other individuals
   attempting to impersonate that subject
-\item
-  \href{https://www.research.ibm.com/artificial-intelligence/trusted-ai/diversity-in-faces}{DiF}:
-  1,000,000 color images of diverse faces w/ dimension labels for
-  objective physical properties
+%\item
+ % \href{https://www.research.ibm.com/artificial-intelligence/trusted-ai/diversity-in-faces}{DiF}:
+%  1,000,000 color images of diverse faces w/ dimension labels for
+ % objective physical properties
 \item
   \href{https://www.nist.gov/itl/iad/image-group/color-feret-database}{FERET}:
   14,126 labeled 384x286 color images of 1,119 faces
-\item
-  \href{https://www.vision.ee.ethz.ch/datasets_extra/food-101/}{Food-101}:
-  101,000 labeled 512x512 color images of 101 classes of food
+%\item
+ % \href{https://www.vision.ee.ethz.ch/datasets_extra/food-101/}{Food-101}:
+ % 101,000 labeled 512x512 color images of 101 classes of food
 \item
   \href{http://www.ivl.disco.unimib.it/activities/food475db/}{Food-475}:
   247,636 labeled color images of 475 classes of food
@@ -318,12 +368,12 @@ TF
   \href{https://github.com/facebookresearch/qmnist}{QMNIST}: An
   extension of the MNIST data set to include 50,000 additional test
   images
-\item
-  \href{https://stevewongv.github.io/derain-project.html}{Real Rain}:
-  29,500 labeled color image pairs, one with and one without rain
-\item
-  \href{https://dataturks.com/projects/sheerun/rooms}{ROOMS}: 10,029
-  labeled (out of 20,001 total) color images of 6 classes of room types
+%\item
+ % \href{https://stevewongv.github.io/derain-project.html}{Real Rain}:
+ % 29,500 labeled color image pairs, one with and one without rain
+%\item
+ % \href{https://dataturks.com/projects/sheerun/rooms}{ROOMS}: 10,029
+ % labeled (out of 20,001 total) color images of 6 classes of room types
 \item
   \href{http://www.scface.org/}{SCface}: 4,160 labeled color images of
   130 faces taken from 6 security cameras of varying quality in either
@@ -340,7 +390,9 @@ TF
   labeled color images of 40,671 vehicles
 \ei
 
-
+\section*{Appendix C}
+Examples of previous projects that went well.
+\todo{Sam add projects?}
 
 
 
