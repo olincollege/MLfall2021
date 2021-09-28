@@ -16,6 +16,10 @@
 \maketitle
 \thispagestyle{firstpage}
 
+Computer vision and image classification tools are rapidly reshaping our lives. Machine learning approaches have driven recent progress in an array of technologies that have the potential to realize huge positive impacts on our world. These tools have become increasingly easy to apply to masses of existing data, however, these tools and their real-world application do not always have the results that their creators intend. To achieve better outcomes, it is important to deeply consider the potential implications and limitations throughout the application design and implementation process. This project aims to help you to begin to develop the skills to understand, implement, and critically evaluate machine learning systems. 
+
+This document is quite long and contains links to other information and resources. The table of contents below should help you nagivate to various sections.
+
 %\begin{learningobjectives}
 %\bi
 %\item Apply 
@@ -25,26 +29,21 @@
 
 \tableofcontents
 
-%\section{Motivation}
-%
-%Computer vision and image classification tools are rapidly reshaping our lives. Machine learning approaches have driven recent progress in an array of technologies that have the potential to realize huge positive impacts on our world. These tools have become increasingly easy to apply to masses of existing data, however, these tools and their real-world application do not always have the results that their creators intend. To achieve better outcomes, it is important to deeply consider the potential implications and limitations throughout the application design and implementation process. This project aims to help you to begin to develop the skills to understand, implement, and critically evaluate machine learning systems. 
-\todo{motivation didn't align with deliverables here, so I commented it out.}
+\pagebreak
 
 \section{Goal-Setting and Customization}
 
-\todo{Flagging new text}
 In the words of one of your course assistants, Jerry, your instructors define a good project as one that successfully uses a neural net on a dataset and demonstrates iteration (you try the neural net, you make improvements, you try again). If you wish to go deeper, that's great!
 
 However, we also (informally) ask you to consider your own learning goals. Is there a specific skill you want to practice? Is there a way of learning (like, asking for help more, trying code without looking at examples first, etc) that you want to practice? We ask you to think about these, and ask your partner about their learning goals.  You can customize this project to support your own learning, and we are happy to help you shape the project to support your goals and challenge yourself. 
-\todo{also new paragraph here, that hopefully reflects our feedback and discussion}
+
 
 \section{Project Description}
 You will be working in teams of two. In this project, you will contemplate a potential application for computer vision (machine learning of images) and you will implement a machine learning algorithm on a data set in support of this application. As part of this project, you will:
 \bi[leftmargin=.5in]
 \item Document the important considerations for your application (e.g., what data are available for training, how well would the algorithm need to work to create value, how could the algorithm and application be tested (beyond the testing you choose to implement), what are the implications of this application in the world, what are the stakeholders, what are the risks). 
-\item Build and iterate on a computer vision model as a step toward this application. We don’t expect you to build the entire application, just to work toward implementing an early version of an algorithm that could be used for this application. It’s likely that you will use a convolutional neural network, but not required. You will build and test multiple versions of your model. You can use pre-built libraries like pytorch.
-\todo{do they have to use some form of neural net? or can they use k-means, or something else?}
-\item Visualize key aspects of your data/model. Include at least two visualizations in your report. You’ll probably find it valuable to visualize many aspects of the data and model as you work. This is helpful in sanity checking and can give good insight into how the model is working.
+\item Build and iterate on a computer vision model as a step toward this application. We don’t expect you to build the entire application, just to work toward implementing an early version of an algorithm that could be used for this application. It’s likely that you will use a convolutional neural network, but not required. Please talk with us if you plan on using a different type of model. You will build and test multiple versions of your model. You can use pre-built libraries like pytorch.
+\item Visualize key aspects of your data/model. Include at least two visualizations in your report with clear labeling and a discussion of their meaning. You’ll probably find it valuable to visualize many aspects of the data and model as you work. This is helpful in sanity checking and can give good insight into how the model is working.
 \item Test and evaluate your model. This will likely include accuracy on training and test sets. Depending on your application, you may also want to collect your own photos, find other images online, and/or manipulate images from your original test set (adding noise, shifting/flipping images, etc). You will also evaluate the effectiveness of this model for your specific application and describe the limitations of your current model and data.
 \item Document your final analysis pipeline for transparency. (A simplified version that does not need to include every parameter, visualization, or tweak that you tried.)
 \ei
@@ -398,10 +397,10 @@ Please submit both a pdf of your Juptyer Notebook (with the code executed) and a
 
 We suggest you work in the Google CoLab environment (like you have for the assignments). When you are ready to submit, please download your notebook as an ipynb file, and submit that to Canvas. 
 
-Your project will be graded on the following aspects. Each item is worth 3 points.\\
-
+Your project will be graded on the following aspects. %Each item is worth 3 points.\\
+\vspace{1em}
 \textbf{General}
-\begin{enumerate}
+\begin{enumerate}[leftmargin=.5in]
 \item The notebook is well-organized.
 \item The notebook balances code and text well.
 \item The notebook runs without errors in the Google CoLab environment.
@@ -412,7 +411,7 @@ Your project will be graded on the following aspects. Each item is worth 3 point
 \end{enumerate}
 
 \textbf{Motivation}
-\begin{enumerate}[resume]
+\begin{enumerate}[resume, leftmargin=.5in]
 \item It is clear what data you used.
 \item The application of your algorithm is clear, and well-motivated.
 \item The notebook explains how well the algorithm would need to work to provide value
@@ -421,7 +420,7 @@ Your project will be graded on the following aspects. Each item is worth 3 point
 \end{enumerate}
 
 \textbf{Implementation}
-\begin{enumerate}[resume]
+\begin{enumerate}[resume, leftmargin=.5in]
 \item The notebook explains the dataset and the features, in text and/or graphics.
 \item The notebook contains a computer vision model.
 \item The computer vision model is implemented correctly.
@@ -429,10 +428,11 @@ Your project will be graded on the following aspects. Each item is worth 3 point
 \end{enumerate}
 
 \textbf{Conclusion}
-\begin{enumerate}[resume]
+\begin{enumerate}[resume, leftmargin=.5in]
 \item The notebook accurately describes the effectiveness of the model in text.
 \item The notebook describes the limitations of the model.
 \item The code generates two visualizations of the data.
+\item The visualizations have clear labels and connections to the text.
 \end{enumerate}
 
 
