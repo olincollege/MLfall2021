@@ -1,0 +1,117 @@
+\documentclass[Assignment5_Solutions]{subfiles}
+
+\invalidatemargin
+
+\IfSubStr{\jobname}{\detokenize{Solutions}}{\toggletrue{solutions}}{\togglefalse{solutions}}
+
+\fancypagestyle{firstpage}
+
+\def\code#1{\texttt{#1}}
+
+
+{\rhead{Assignment 5 \linebreak \textit{Version: \today}}}
+
+\title{Assignment 5: Data Cleaning}
+\author{Machine Learning}
+\date{Fall 2021}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{firstpage}
+
+\begin{learningobjectives}
+\bi
+\item Become familiar with some basic data cleaning tools
+\item Prepare for your projects, which may involved using un-cleaned data
+\ei
+\end{learningobjectives}
+
+
+
+\section{Data cleaning}
+\subsection{Introduction}
+Data cleaning is an important skill.  For your final project, you may choose to use a dataset that has not been nicely cleaned and packaged, like many of the datasets we've worked with in this class have been. You could get a Ph.D. in this, it's a broad topic. In this assignment, we hope to give you a handful of tools that will help you in the future.
+
+In Carrie's opinion, you have two choices-- you can clean your data before you work with it, or your can jump to analysis, realize your results make no sense, and data clean after you've wasted a lot of time. (Or, worst case, present results that are nonsense because you didn't realize your data needed to be cleaned. Let's avoid that one.)
+
+Please read \href{https://towardsdatascience.com/the-ultimate-guide-to-data-cleaning-3969843991d4}{this introduction} to data cleaning. When the author talks about ``throwing a random forest at the data'' he's talking about applying a machine learning technique, not about throwing a randomly picked group of trees, brush, moss, and wildlife at something.
+
+\emph{I have a philosophical disagreement with this author.} What he describes might be an okay practice for analyzing a consumer database for a company.  But it's bad practice for science. In science you want to track down what exactly is going on in each instance. It's not enough to know why a data point is incorrect (for example, a negative height). You need to know why you got a negative height measurement, and once you understand that why, you understand what you can do about it. 
+In science, you don't want to get rid of surprising results-- after all, you don't want to miss out on a Nobel Prize because you discarded a data point you didn't understand! 
+
+\todo{Following is from AstroStats. Carrie TBD add census data, make other tweaks to follow ML conventions}
+
+\begin{enumerate}[resume]
+\item Carefully consider the following table of moon crater data. This is adapted from a larger dataset\footnote{``A New Global Database of Lunar Impact Craters >1–2 km: 1. Crater Locations and Sizes, Comparisons With Published Databases, and Global Analysis,'' Robbins, JGR Planets, 2018. Inconsistencies introduced this data for you to practice, real data is accurate.} you'll be working with for your final project. What data values are suspicious? List them and explain why. You are encouraged to look up information about the moon to help you with this.\\
+CRATER\_ID = identifier assigned to crater by scientist doing study\\
+LAT\_CIRC\_IMG =Latitude of center of crater, degrees.\\
+LON\_CIRC\_IMG = Longitude of center of crater, from 0 to 360 degrees.\\
+DIAM\_CIRC\_SD\_IMG = Standard deviation of kilometers of the fit residuals. Each manual
+rim point’s distance from the crater center was calculated and subtracted from the best-fit circle's radius, and this value is the standard deviation of those differences.\\
+
+\begin{center}
+    \begin{tabular}{| l | l | l | l | l |}
+    \hline
+    CRATER\_ID & LAT\_CIRC\_IMG  & LON\_CIRC\_IMG & DIAM\_CIRC\_IMG & DIAM\_CIRC\_SD\_IMG    \\ \hline
+    00-1-000000 &  -19.83040           &  264.7570             & 940.960                & -21.31790  \\ \hline
+    00-1-000001 & 44.77630             &     182.0995          & 249.840                & 5.99621      \\ \hline
+    00-1-000002 & 57.08660             & 378.6020              & 3474.891	           & 88.94687 \\ \hline
+    00-1-00000i & 1.96124              & 230.6220               & 55.762            & 1.18190 \\ \hline
+    00-1-000004 & -49.14960           & 230.6220               &-654.332          & 17.50970 \\ \hline
+    \end{tabular}
+\end{center}
+\solution{\emph{This one is worth 18 points-- it's a lot of work, and I couldn't figure out how to break it into subsections. 3 points for each of the ones below. Use your judgement to grade answers I didn't anticipate-- if they are reasonable, give them points.}\\
+
+Crater: 00-1-000000 has negative DIAM\_CIRC\_SD\_IMG, standard deviation can't be negative. \\
+Crater: 00-1-000002 has a LON\_CIRC\_IMG > 360 degrees.\\
+Crater: 00-1-000002 DIAM\_CIRC\_IMG is greater than radius of moon.\\
+Crater: 00-1-00000i has suspicious id- why isn't this one a number?\\
+Crater: 00-1-000004 or 00-1-00000i. LON\_CIRC\_IMG identical, possibly mistake.\\
+Crater: 00-1-000004 has a negative diameter.\\}
+
+\end{enumerate}
+
+\subsection{Larger Data Sets}
+What if you have too many values in your data to manually inspect each one, as you did in the previous exercise? Another tool you can use is to plot each value and see if those plots make sense to you. Let's take a minute to think what we expect for a few histograms. \emph{If you are having trouble with any of these, please go outside and LOOK AT THE MOON. Or, at least look at a photo of the Earth-facing and not Earth-facing (``dark'') sides of the Moon.}
+
+\begin{enumerate}[resume]
+\item Imagine you were to plot a histogram of LAT\_CIRC\_IMG. How would you expect it to look?
+\solution{Just by looking at the moon, I'd expect that craters would be roughly constant among latitude. There are fewer craters in the dark Maria patches, and so maybe I'd see a little more craters near the south pole. But overall, they should be about constant.}
+\item Imagine you were to plot a histogram of LON\_CIRC\_IMG. How would you expect it to look?
+\solution{Just by looking at the moon, I'd expect that craters would be roughly constant among longitude. There are fewer craters in the dark Maria patches on the visible side of the moon, and so maybe I'd see a little dip in craters in the side facing me, But again, mostly constant.}
+\item Imagine you were to plot a histogram of DIAM\_CIRC\_IMG. How would you expect it to look?
+\solution{Looking at the moon there are more small craters than big craters. I'd expect to see way more small craters than big craters.}
+\end{enumerate}
+
+Now, let's test your results. Work in the same jupyter notebook as you did for the previous question. Please format your notebook nicely to make it easy to grade.
+
+We are now going to work with a portion of the Robbins Moon database. The full database has 1,296,796 craters, which is a little too many for your computers to handle easily, so I've made a smaller version by getting rid of any craters smaller than 5 km in diameter. You can get that file \href{https://drive.google.com/file/d/18myP746XC0rvttoUd4XqcQKkCPKHlX6_/view?usp=sharing}{here}.
+
+You'll be using Pandas. You'll first need to read in the file. If you're using Google Collab, you'll need to tell it where to look for the file, here's some \href{https://towardsdatascience.com/3-ways-to-load-csv-files-into-colab-7c14fcbdcb92}{example instructions}.
+
+You'll need to import the Pandas library and read in the file, something like this:\\
+\code{import pandas as pd}\\
+\code{craters=pandas.read\_csv('AstroStats\_Robbins\_Moon.csv',  sep = ',')}\\
+
+Anytime I read in a file, I always like to check the output. This quick check, that prints the data column headers and the first 5 values, lets me learn about the data.\\
+\code{print(craters.head(5))}\\
+
+\begin{enumerate}[resume]
+\item Check how many craters are in the dataset by typing \code{len(craters)}. Report the answer.
+\solution{83,061 craters}
+\item Plot a histogram of  LAT\_CIRC\_IMG.
+\solution{See 2\_Anytime\_PoissonPlot2021 in the AstroStats Solutions Google Drive for code, but make sure they have axis labeled with units for full points!}
+\item How does this compare to what you were expecting? Are there any obvious problems with the data?
+\solution{Anything that makes sense and is thoughtful given their previous answer. For example, I see that craters drop off near the poles (+90 and -90) and that makes sense-- there's less area there, so fewer craters. I see no problems.}
+\item Plot a histogram of  LON\_CIRC\_IMG.
+\item How does this compare to what you were expecting? Are there any obvious problems with the data?
+\solution{Anything that makes sense and is thoughtful given their previous answer. For example, There's more variance I expect between the near side and far side, due to the Maria (dark patches). There's also more variance on the night side. Interesting! Nothing super alarming though I would love to investigate more. I'm okay if  a student says that they are suspicious of this plot and would need to investigate more.}
+\item Plot a histogram of   DIAM\_CIRC\_IMG. Hint: For this plot to be useful/meaningful, you may want to use the xlim parameter on matplotlib.
+\item How does this compare to what you were expecting? Are there any obvious problems with the data?
+\solution{Anything that makes sense and is thoughtful given their previous answer. Personally, I'm always surprised what an exponential relationship this is-- when you look at a Moon photograph it's hard to see that there's SO MANY more small craters than big ones.}
+\end{enumerate}
+
+
+\end{document}
+

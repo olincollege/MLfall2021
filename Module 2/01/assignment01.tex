@@ -169,8 +169,8 @@ Come up with three examples of observable events that are probabilistic in natur
 \begin{boxedsolution}
 Here are some possible ideas.
 \bi
-\item The event \emph{The Nationals win the 2019 MLB World Series} is an observable event (we will ultimately find out whether or not this happens).  The probability of this event will depend on the quality of their opponent (currently this is either the Yankees or the Astros, both of whom would be favored in the series) and other factors (such as home field advantage).
-\item The event the movie Joker wins the Academy Award for Best Pictures is an observable event.  The probability that it occurs will depend on the amount of money spent promoting it to academy members, the quality of other movies that are released, etc.
+\item The event \emph{The Nationals win the MLB World Series} is an observable event (we will ultimately find out whether or not this happens).  The probability of this event will depend on the quality of their opponent and other factors (such as home field advantage).
+\item The event the movie \emph{Don't Look Up} wins the Academy Award for Best Pictures is an observable event.  The probability that it occurs will depend on the amount of money spent promoting it to academy members, the quality of other movies that are released, etc.
 \ei
 \end{boxedsolution}
 
@@ -183,7 +183,7 @@ Next, we'll define more formally\sidenote{this is not the full definition of a \
 
 An \emph{event} is something that may or may not occur in response to some random process.  For instance, we could define the event that a coin comes up heads when it is flipped.  We often use capital letters to indicate events.  Since we've been using capital letters to also represent matrices, in our materials we'll use a cool mathy-looking calligraphic font to represent events.  For instance, we might use the symbol $\mathcal{H}$ to refer to the event that a coin flip comes up heads. It's important to emphasize that a single random process can have many associated events.   For instance, for the coin flip example we might also define $\mathcal{T}$ to be the event that the coin comes up tails (or $\mathcal{U}$ to indicate that event that the coin rotated at least 10 times in the air when we flipped it).
 
-Further, events don't necessarily have to be mutually exclusive.  For instance, we might define the event $\mathcal{R}_h$ to indicate the event that the Republican party controls the majority in the House of Representatives following the 2020 election and $\mathcal{D}_s$ to indicate the event that the Democratic party controls the majority in the Senate following the 2020 election.  Both (or none) of these events could occur.
+Further, events don't necessarily have to be mutually exclusive.  For instance, we might define the event $\mathcal{R}_h$ to indicate the event that the Republican party controls the majority in the House of Representatives following the next election and $\mathcal{D}_s$ to indicate the event that the Democratic party controls the majority in the Senate following the next election.  Both (or neither) of these events could occur.
 
 \subsection{Probability Measure Function}
 The probability measure function assigns a probability to the occurrence of any particular event.  We can think of this probability measure function as taking as input an event and outputting a probability.  For instance, $p(\mathcal{E})$ provides the probability that event $\mathcal{E}$ occurs according to probability measure $p$.  All probability measure functions must satisfy the following properties.
@@ -277,7 +277,7 @@ p(\mbox{no two students share a birthday}) &= 1 - p( \neg \mbox{no two students 
 
 \begin{externalresources}[(60 minutes)]
 \begin{learningobjectives}
-Note that these learning objectives have been written to be very specific (based on feedback from the course survey).  When you first read them, you probably won't know what they mean in detail.  As you go through the readings, hopefully the more precise statement of these learning objectives will be useful for assessing your understanding of the provided resources.
+Note that these learning objectives have been written to be very specific (based on feedback).  When you first read them, you probably won't know what they mean in detail.  As you go through the readings, hopefully the more precise statement of these learning objectives will be useful for assessing your understanding of the provided resources.
 
 \bi
 \item When Bayes' rule is useful (i.e., when $p(A|B)$ is easier to work with than $p(B|A)$).
@@ -288,7 +288,7 @@ Note that these learning objectives have been written to be very specific (based
 \ei
 \end{learningobjectives}
 
-Allen Downey (ever heard of him?) wrote an excellent book called Think Bayes that introduces Bayesian analysis.  The \href{http://www.greenteapress.com/thinkbayes/html/thinkbayes002.html}{first chapter} (which you should read) starts with a less formal definition of probability than the one we gave earlier.  The chapter then gives intuitions around conjoint probability (the probability that multiple events occur simultaneously), conditional probability (the probability that some event occurs conditioned on another event having occurred), and finally to Bayes' rule (a surprisingly easy theorem to derive that allows you to write one conditional probability distribution in terms of another).  The Monty Hall problem in section 1.7 is probably okay to skim (see Allen's note at the end of that section for why this is the case).
+Olin Professor Allen Downey wrote an excellent book called \emph{Think Bayes} that introduces Bayesian analysis.  The \href{http://www.greenteapress.com/thinkbayes/html/thinkbayes002.html}{first chapter}  starts with a less formal definition of probability than the one we gave earlier.  Please read this chapter. The chapter then gives intuitions around conjoint probability (the probability that multiple events occur simultaneously), conditional probability (the probability that some event occurs conditioned on another event having occurred), and finally to Bayes' rule (a surprisingly easy theorem to derive that allows you to write one conditional probability distribution in terms of another).  The Monty Hall problem in section 1.7 is probably okay to skim (see Allen's note at the end of that section for why this is the case).
 
 Allen's treatment of the material is, of course, not the only one out there (we like it for its focus on building intuition and focusing on the key ideas).  Here are some other resources you might consider checking out (they are optional).
 \bi
