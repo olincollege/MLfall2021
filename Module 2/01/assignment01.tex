@@ -8,7 +8,7 @@
 
 \title{Assignment 1: Bayes' Rule}
 \author{Machine Learning}
-\date{Fall 2019}
+\date{Fall 2021}
 
 \begin{document}
 
@@ -46,7 +46,7 @@ It turns out that the notion of probability provides us with a powerful method t
 Back by popular demand\sidenote{there was actually no specific demand for this, but we couldn't resist :).}... here are Six (more) Big ideas in ML!  Here we're going to highlight ideas in ML that have specific connections to Bayesian machine learning.
 
 \begin{notice}
-Our intent is to provide a larger framework for you to interpret the content you are learning.  You should not expect to understand all of these ideas in any sort of detail.  Please take these as a ``wow isn't this cool / interesting,'' and avoid getting too lost in the weeds.
+Our intent is to provide a larger framework for you to interpret the content you are learning.  You should not expect to understand all of these ideas in detail.  We hope you can approach this from a mindset of, ``wow isn't this cool / interesting,'' and avoid getting too lost in the weeds.
 \end{notice}
 
 
@@ -76,21 +76,21 @@ Bayesian phylogenetic methods were introduced in the 1990s and have since revolu
 
 The concept of a phylogenetic tree has even been used in linguistics as a mechanism to study \href{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180908}{the evolution of languages over time}.
 
-\paragraph{(If You're Interested): More examples of finding hidden structures in data}
+\paragraph{Optional further reading: More examples of finding hidden structures in data}
 
-\href{https://homes.cs.washington.edu/~rao/ScienceIndus.pdf}{Entropic Evidence for Linguistic Structure in the Indus Script}
+\href{https://www.science.org/doi/full/10.1126/science.1170391}{Entropic Evidence for Linguistic Structure in the Indus Script}
 
 \subsection*{Idea 2: Bayesian Methods Allow Us to Write Probabilistic Programs}
 
-The key idea of Bayesian machine learning is that we can take causal models of how hidden structures give rise to observable data and invert them to allow us to use data to reason about the hidden structures that caused that data.  One of the coolest ways in which this fundamental idea is being utilized is in the field of \href{https://en.wikipedia.org/wiki/Probabilistic_programming}{probabilistic programming}.  In a probabilistic program, the programmer writes code to implement the causal model (the one that goes from hidden structures to data).  In contrast to a typical program where we might take a particular input and produce a single output, a probabilistic program specifies a random process by which data is generated.  Uncertainty is represented explicitly at each step in the program.  Once the programmer has specified the causal model for how data is generated, the probabilistic programming framework can automatically infer the hidden structure given a sample of data!
+The key idea of Bayesian machine learning is that we can take causal models of how hidden structures give rise to observable data and invert them to allow us to use data to reason about the hidden structures that caused that data.  One of the coolest ways in which this fundamental idea is being used is in the field of \href{https://en.wikipedia.org/wiki/Probabilistic_programming}{probabilistic programming}.  In a probabilistic program, the programmer writes code to implement the causal model (the one that goes from hidden structures to data).  In contrast to a typical program where we might take a particular input and produce a single output, a probabilistic program specifies a random process by which data is generated.  Uncertainty is represented explicitly at each step in the program.  Once the programmer has specified the causal model for how data is generated, the probabilistic programming framework can automatically infer the hidden structure given a sample of data!
 
-For instance, one of the examples for the popular probabilistic programming library \href{https://docs.pymc.io/}{pymc3} shows how a model of CO2 concentration in the atmosphere could be created using a probabilistic program (see \href{https://docs.pymc.io/notebooks/GP-MaunaLoa.html}{Mauna Loa CO2 example}).  The punchline graph from that notebook is reproduced below.  In this case the programmer had to specify the process by which underlying phenomena (e.g., increases in CO2 levels globally, seasonal factors) give rise to observable data (CO2 measurements at the top of Mauna Loa).  This probabilistic program was then given atmospheric data up to 2004 and pymc3 automatically generated predictions for the CO2 data from 2004 onwards.  In addition to the curve shown below, the model was able to decompose the curve into various components (including long range and seasonal effects).  You may notice the fit is not perfect.  There is \href{https://docs.pymc.io/notebooks/GP-MaunaLoa2.html}{a more advanced example} that achieves a better fit and leverages ice core data.
+For instance, one of the examples for the popular probabilistic programming library \href{https://docs.pymc.io/}{pymc3} shows how a model of CO2 concentration in the atmosphere could be created using a probabilistic program (see \href{https://docs.pymc.io/en/stable/pymc-examples/examples/gaussian_processes/GP-MaunaLoa.html}{Mauna Loa CO$_2$ example}).  The punchline graph from that notebook is reproduced below.  In this case the programmer had to specify the process by which underlying phenomena (e.g., increases in CO2 levels globally, seasonal factors) give rise to observable data (CO2 measurements at the top of Mauna Loa).  This probabilistic program was then given atmospheric data up to 2004 and pymc3 automatically generated predictions for the CO2 data from 2004 onwards.  In addition to the curve shown below, the model was able to decompose the curve into various components (including long range and seasonal effects).  You may notice the fit is not perfect.  
 
 \begin{center}
 \includegraphics[width=0.8\linewidth]{figures/maunaloa}
 \end{center}
 
-\paragraph{(If You're Interested): Here are some more examples of probabilistic programming}
+\paragraph{(Optional further reading:: Here are some more examples of probabilistic programming}
 Is computer vision really just inverse computer graphics?  If you use probabilistic programming you can simply specify the forward model of how objects in a scene give rise, probabilistically, to an image. Probabilistic programming can then take an image and infer the underlying structure that gave rise to a test image.  Examples of this include fitting  \href{http://mrkulk.github.io/www_cvpr15/}{3D models to human faces} (follow the link to some cool videos) and \href{https://science.sciencemag.org/content/sci/360/6394/1204.full.pdf}{predicting how a geometric scene would look from an arbitrary vantage point from a single training image}.
 
 
@@ -109,8 +109,8 @@ The science of ``aerodynamics'' is being invoked in the quote to reference a fun
 \bi
 \item \href{https://www.sciencedirect.com/science/article/pii/S0022249615000061}{Sensory perception}
 \item \href{https://www.nature.com/articles/nn963}{Motor control}
-\item \href{http://web.mit.edu/cocosci/Papers/Science-2011-Teglas-1054-9.pdf}{Babies can use Bayesian inference to understand physics... sort of}
-\item \href{https://www.ncbi.nlm.nih.gov/pubmed/24730598}{The tendency of people to with divergent beliefs to become more polarized when presented with the same evidence (think current politics)}
+\item \href{https://pubmed.ncbi.nlm.nih.gov/21617069/}{Babies can use Bayesian inference to understand physics... sort of}
+\item \href{https://www.ncbi.nlm.nih.gov/pubmed/24730598}{The tendency of people to with divergent beliefs to become more polarized when presented with the same evidence.}
 \item \href{https://www.sciencedirect.com/science/article/pii/S0022249608001090}{How people behave in a simulated gambling environment}
 \item \href{https://arxiv.org/abs/1806.03916}{How people ascribe trust to others}
 \item \href{https://www.sciencedirect.com/science/article/pii/S1364661306001318}{How people acquire language}
@@ -119,14 +119,14 @@ The science of ``aerodynamics'' is being invoked in the quote to reference a fun
 
 \subsection*{Idea 4: Bayesian Methods Give Us a Language for Reasoning about Algorithmic Fairness}
 
-We've talked about bias in machine learning models (e.g., when we discussed Gender Shades).  The examples given in the \href{http://gendershades.org/overview.html}{Gender Shades} paper were pretty cut-and-dry --- the commercial gender classification models work very poorly on women and people of color (and especially the intersection of the two).  In other situations it is not so straightforward to reason about bias. For instance, in the well-known ProPublica piece \href{https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing}{Machine Bias} the authors describe how a tool for predicting criminal recidivism (whether a criminal would reoffend) was biased against African Americans.  This piece was important in the field of FAT-ML in that it sparked work on articulating various definitions of algorithmic fairness (these notions were sometimes, inherently, inconsistent).  Most of these models of fairness are articulated using the language of probability.  Further, some of the same formalisms that have been used to develop probabilistic machine learning approaches can be used to understand and reason about bias in an algorithm.
+We've talked about bias in machine learning models in this class.  The examples given in this \href{http://gendershades.org/overview.html}{Gender Shades} paper are pretty cut-and-dry --- the commercial gender classification models work very poorly on women and people of color (and especially the intersection of the two).  In other situations it is not so straightforward to reason about bias. For instance, in the well-known ProPublica piece \href{https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing}{Machine Bias} the authors describe how a tool for predicting recidivism (whether a person would be arrested again) was biased against African Americans.  This piece was important in the field of FAT-ML in that it sparked work on articulating various definitions of algorithmic fairness (these notions were sometimes, inherently, inconsistent).  Most of these models of fairness are articulated using the language of probability.  Further, some of the same formalisms that have been used to develop probabilistic machine learning approaches can be used to understand and reason about bias in an algorithm.
 
-We'll be studying various notions of algorithmic fairness, but if you're interested, an in-depth overview of this is provided in \href{https://arxiv.org/pdf/1906.11333.pdf}{Fairness criteria through the lens of directed acyclic graphical models}.  It's also worth mentioning that many of these notions of fairness have also been challenged on the grounds that they are overly abstract and gloss over important context in determining whether something is biased or not.
+We'll be studying various notions of algorithmic fairness in later classes. If you're interested, here's an optional in-depth overview: \href{https://arxiv.org/pdf/1906.11333.pdf}{Fairness criteria through the lens of directed acyclic graphical models}.  Many of these notions of fairness have also been challenged on the grounds that they are overly abstract and gloss over important context in determining whether something is biased or not.
 
 
 \subsection*{Idea 5: Bayesian Methods Allow for Learning More Interpretable and Flexible Models}
 
-Since Bayesian models typically start from a causal model of how observable data are generated, when this process is inverted, you are left with an understanding of the most probable causes of the data you observed.  Oftentimes this output is easier to interpret than what might be generated by, say, a neural network, which has no explicit causal model of data generation.  As a motivating example, take for example the usage of computers to help doctors diagnose patients (this is sometimes called a \href{https://en.wikipedia.org/wiki/Clinical_decision_support_system}{Clinical Decision Support System}).  Here are two ways in which we might tackle this problem using neural networks versus Bayesian machine learning.
+Since Bayesian models typically start from a causal model of how observable data are generated, when this process is inverted, you are left with an understanding of the most probable causes of the data you observed.  Oftentimes this output is easier to interpret than what might be generated by, say, a neural network, which has no explicit causal model of data generation.  Take, for example, the usage of computers to help doctors diagnose patients (this is sometimes called a \href{https://en.wikipedia.org/wiki/Clinical_decision_support_system}{Clinical Decision Support System}).  Here are two ways in which we might tackle this problem using neural networks versus Bayesian machine learning.
 
 \bi
 \item Neural networks: we would get a dataset of tons of patients, their symptoms, and their diagnoses.  We would train a neural network model to map from symptoms to diagnoses.
@@ -164,7 +164,7 @@ Most of us are used to thinking that events can be probabilistic, that is we can
 
 \vspace{1em}
 \begin{exercise}[(10 minutes)]
-Come up with 3ish examples of observable events that are probabilistic in nature.  For each event, provide the probability that it occurs or explain what factors would determine the probability.  Some potential ideas to get you going: sporting events, elections, weather, etc.
+Come up with three examples of observable events that are probabilistic in nature.  For each event, provide the probability that it occurs or explain what factors would determine the probability.  Some potential ideas to get you going: sporting events, elections, weather, etc.
 
 \begin{boxedsolution}
 Here are some possible ideas.
@@ -432,7 +432,7 @@ We don't have an exercise for you to do here, but it is important for you to und
 Go through the \href{https://colab.research.google.com/github/mlfa19/assignments/blob/master/Module\%202/01/Assignment_1_Companion_Notebook.ipynb}{assignment 1 companion notebook}.
 \end{externalresources}
 
-\companionnotebook{Assignment_1_Companion_Notebook}
+%\companionnotebook{Assignment_1_Companion_Notebook}
 
 
 
