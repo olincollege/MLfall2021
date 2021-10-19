@@ -375,7 +375,7 @@ Note that it was up to us what order we applied the product rule.  If we had fir
 Another way to think about marginalization is to draw a tree where you have the event, which you are marginalizing out ($\mathcal{D}$ in the previous exercise) at the first level of the tree and the variable you want to know the probability of ($\mathcal{S}$ in the previous exercise) at the next junction in the tree (see Figure~\ref{fig:treenoprobs}).
 
 
-Further, we annotate the arrows with the conditional probability of the event conditioned on the things further up in the tree (note that for $\mathcal{D}$ there is nothing further up the tree, so we just write $p(\mathcal{D})$ or $p(\neg \mathcal{D})$).
+Further, we annotate the lines with the conditional probability of the event conditioned on the things further up in the tree (note that for $\mathcal{D}$ there is nothing further up the tree, so we just write $p(\mathcal{D})$ or $p(\neg \mathcal{D})$).
 
 \begin{center}
 \includegraphics[width=0.6\linewidth]{figures/treeprobs}
@@ -392,10 +392,10 @@ p(\mathcal{S}) &= p(\mathcal{D}) p(\mathcal{S}|\mathcal{D}) + p(\neg \mathcal{D}
 \end{align}
 
 
-\begin{exercise}[(20 minutes)]
-Do problem 2 from \href{http://wwwf.imperial.ac.uk/~atw/Bayes.pdf}{this assignment}.  They use $\mathcal{E}'$ to refer to the event $\neg \mathcal{E}$.
+\begin{exercise}[(10 minutes)]
+Please use the tree diagram to give an equation for $p(\neg \mathcal{S})$
 \begin{boxedsolution}
-Solution is embedded in the link.
+ $p(\neg \mathcal{S}) =  p(\mathcal{D}) p( \neg \mathcal{S}|\mathcal{D}) + p(\neg \mathcal{D}) p(\neg \mathcal{S}|\neg \mathcal{D}) $
 \end{boxedsolution}
 \end{exercise}
 
@@ -407,7 +407,7 @@ We've talked about the concept of an event that captures whether something happe
 Watch the following two videos from Khan Academy on Random Variables.
 \bi
 \item \href{https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library/random-variables-discrete/v/random-variables}{Khan Academy Video on Random Variables}.
-\item \href{https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library/random-variables-discrete/v/discrete-and-continuous-random-variables}{Discrete and Continuous Random Variables} (note: for now we are interested in discrete random variables).
+\item \href{https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library/random-variables-discrete/v/discrete-and-continuous-random-variables}{Discrete and Continuous Random Variables} (note: for now we are interested in discrete random variables). Note that the confusion of discrete and discreet is one of Carrie's irrational dislikes.
 \ei
 \end{externalresources}
 
@@ -428,15 +428,7 @@ p(X=2) &= p(\mbox{2 heads come up}) = \frac{3}{8} \nonumber \\
 p(X=3) &= p(\mbox{3 heads come up}) = \frac{1}{8} \nonumber 
 \end{align}
 
-We don't have an exercise for you to do here, but it is important for you to understand what a PMF is when digging into the companion notebook.
-
-\section{Basic Bayes in Python}
-\begin{externalresources}[(30 minutes)]
-Go through the \href{https://colab.research.google.com/github/mlfa19/assignments/blob/master/Module\%202/01/Assignment_1_Companion_Notebook.ipynb}{assignment 1 companion notebook}.
-\end{externalresources}
-
-%\companionnotebook{Assignment_1_Companion_Notebook}
-
+We don't have an exercise for you to do here, but it is important for you to understand what a PMF is when digging into the companion notebook, which we'll be going over in the next class.
 
 
 \end{document}
