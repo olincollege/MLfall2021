@@ -42,6 +42,22 @@ It turns out that the notion of probability provides us with a powerful method t
 \item give us powerful tools to reason about fairness and bias in machine learning models.
 \ei
 
+\begin{notice}
+This assignment has two independent parts:\\
+
+A) Context of why probabilistic models are rad ( see next section called Six Big Ideas in (Probabilistic) Machine Learning)\\
+
+B) Terminology, math, and concepts of Bayes' Rule and conditional probabilities (the rest of the assignment)\\
+
+The concepts of Bayes rule and conditional probabilities can be tricky and require some time to wrestle with (and ideally sleep on), especially if these topics are new to you. Please start this part of the assignment early so you have time to revisit it.\\
+
+For some students, the exploration of applications is very important to frame why you should learn math concepts. In this case, it probably makes sense to start with the Six Big Ideas section.
+
+Otherwise, it may be helpful to start with some of the probability stuff, so you give your brain time to see it multiple times.  Please use whatever strategy you think will work best for your learning.
+
+\end{notice}
+
+
 \section{Six Big Ideas in (Probabilistic) Machine Learning}
 Back by popular demand\sidenote{there was actually no specific demand for this, but we couldn't resist :).}... here are Six (more) Big ideas in ML!  Here we're going to highlight ideas in ML that have specific connections to Bayesian machine learning.
 
@@ -265,8 +281,8 @@ Notice that the event \emph{no two students share a birthday} only happens when 
 \begin{align}
 p(\mbox{no two students share a birthday}) &= 1 - p( \neg \mbox{no two students share a birthday})  \nonumber\\
 &= 1 - p(\mbox{at least two students share a birthday}) \nonumber \\
-&= 1 - 0.999  \nonumber\\
-&= 0.001  \nonumber
+&= 1 - 0.95  \nonumber\\
+&= 0.05  \nonumber
 \end{align}
 \end{boxedsolution}
 
@@ -298,7 +314,7 @@ Please read or watch one of the following resources.
 \bi
 \item \href{https://www.youtube.com/watch?v=R13BD8qKeTg}{Veritasium Episode on Bayes' Theorem} has a bit more history and philosophy of Bayes' Theorem along with some nice visualizations.  It also includes the presenter walking on a very scenic mountain (for some reason), so there's that if nothing else.
 \item Julia Galef's video \href{https://www.youtube.com/watch?v=BrK7X_XlGB8}{A Visual Guide to Bayesian Thinking}
-\item I (Paul) ran across \href{https://youtube.com/watch?v=nvqXXlz-rx0}{this example of applying Bayes' rule to a real world problem}.  It was created by a grad school friend of mine and is hilarious (lots of Cat Memes).  I did notice that there is a mistake in the math at the 8:12 mark in the video (he states that $p(\mbox{alarm} | \mbox{no theft}) = 1 - p(\mbox{alarm} | \mbox{theft})$, which is not necessarily the case).  It's still a good video though.
+\item Paul Ruvolo (one of the creators of the course) ran across \href{https://youtube.com/watch?v=nvqXXlz-rx0}{this example of applying Bayes' rule to a real world problem}.  It was created by a grad school friend of his and is hilarious (lots of Cat Memes).  He did notice that there is a mistake in the math at the 8:12 mark in the video (he states that $p(\mbox{alarm} | \mbox{no theft}) = 1 - p(\mbox{alarm} | \mbox{theft})$, which is not necessarily the case).  It's still a good video though.
 \ei
 
 \end{externalresources}
@@ -322,7 +338,7 @@ The posterior probability ($0.238$) we computed is less than the prior probabili
 \end{boxedsolution}
 
 
-\item You train a neural network to identify whether \href{https://www.freecodecamp.org/news/chihuahua-or-muffin-my-search-for-the-best-computer-vision-api-cbda4d6b425d/}{an image contains a picture of a Chihuahua or a Blueberry Muffin} (you know you want to click the link!).  Let's further assume that there are no images that contain both a muffin and a Chihuahua (of course as we all know Chihuahuas love muffins).  Based on your project report for module 1, you know that if the image contains a Chihuahua, your model will identify it as such with probability 0.9.  Also, you know that if the image contains a muffin, your model will identify it as such with probability 0.8.  You now decide to test your model on a dataset which contains 80\% muffins.  Assuming that your model predicted that an image contained a muffin, what is the probability that it actually contains a muffin? (you can assume that the performance of your model doesn't change when run on this new dataset).
+\item You train a neural network to identify whether \href{https://www.freecodecamp.org/news/chihuahua-or-muffin-my-search-for-the-best-computer-vision-api-cbda4d6b425d/}{an image contains a picture of a Chihuahua or a Blueberry Muffin} (you know you want to click the link!).  Let's further assume that there are no images that contain both a muffin and a Chihuahua (of course as we all know Chihuahuas love muffins).  Based on your project report for module 1, you know that if the image contains a Chihuahua, your model will identify it as a Chihuahua with probability 0.9.  Also, you know that if the image contains a muffin, your model will identify it as a muffin with probability 0.8.  You now decide to test your model on a dataset which contains 80\% muffins.  Assuming that your model predicted that an image contained a muffin, what is the probability that it actually contains a muffin? (you can assume that the performance of your model doesn't change when run on this new dataset).
 
 \begin{boxedsolution}
 Let $\mathcal{M}$ represent the event that the image contains a Muffin.  Let $\mathcal{D}_M$ represent that a muffin was detected in the image.
