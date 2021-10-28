@@ -144,7 +144,7 @@ Again, suppose we have two random variables $X$ and $Y$.  We are interested in c
 p(X=x) &= \sum_{y=1}^k p(X=x, Y=y)\label{eq:rvmarginal}
 \end{align}
 
-You should notice that this equation is very similar to Equation~\ref{eq:marginalizationevents} except that instead of summing over the probability for the two possible outcomes with respect to the event $\mathcal{B}$ (i.e., $\mathcal{B}$ either happens or it does not), we are now summing over the $k$ possible values that $Y$ could take.  Random variables don't necessarily have to take on values from 1 to $k$.  In general, if the random variable $Y$ can take on any value from some discrete set of values $\mathcal{Y}$ (we are using the calligraphic font because we are referring to a set), then the marginal distribution of $X$ can be written as:
+You should notice that this equation is similar to Equation~\ref{eq:marginalizationevents} except that instead of summing over the probability for the two possible outcomes with respect to the event $\mathcal{B}$ (i.e., $\mathcal{B}$ either happens or it does not), we are now summing over the $k$ possible values that $Y$ could take.  Random variables don't necessarily have to take on values from 1 to $k$.  In general, if the random variable $Y$ can take on any value from some discrete set of values $\mathcal{Y}$ (we are using the calligraphic font because we are referring to a set), then the marginal distribution of $X$ can be written as:
 \begin{align}
 p(X=x) &= \sum_{y \in \mathcal{Y}} p(X=x, Y=y) \enspace . \label{eq:rvmarginalgeneral}
 \end{align}
@@ -171,7 +171,7 @@ p(L = \mbox{green}) = 0.7
 The model that governs the conditional probability of $H$ given $L$ is as follows.
 \begin{align}
 p(H = \mbox{hit} | L = \mbox{red}) = 0.01 \nonumber \\
-p(H = \mbox{not hit} | L = \mbox{red}) = 0.99 &~~~~\mbox{Note: the probability of ``not hit'' is always 1 - probability of hit} \nonumber \\
+p(H = \mbox{not hit} | L = \mbox{red}) = 0.99 &~~~~\mbox{Note: the probability of ``not hit''  = 1 - probability of hit} \nonumber \\
 p(H = \mbox{hit} | L = \mbox{yellow}) = 0.1 \nonumber \\
 p(H = \mbox{not hit} | L = \mbox{yellow}) = 0.9 \nonumber \\
 p(H = \mbox{hit} | L = \mbox{green}) = 0.8  \nonumber \\
@@ -243,7 +243,7 @@ Here are some ideas.
 \bi
 \item The daily increase in the Dow Jones Industrial average and the daily increase in the NASDAQ.
 \item The event that the American League wins the World Series in 2019 and the event that the National League wins the World Series in 2019.
-\item Testing positive for a disease and having that disease.
+\item The probability that it's raining today and the probability that it will rain tomorrow.
 \ei
 \end{boxedsolution}
 
@@ -271,7 +271,7 @@ In order to test $\mathcal{H}_1 \condindep \mathcal{H}_2$ we need to check the f
 p(\mathcal{H}_1, \mathcal{H}_2) \stackrel{?}{=} p(\mathcal{H}_1) p(\mathcal{H}_2)
 \end{align}
 
-We can compute each of the terms in the preceding equation using the tree diagram.  In total there are 8 possible paths through the tree.  Recall that we can find the probability of a path by multiplying the numbers on the arrows.  To find the probability of a particular event, say $p(\mathcal{H}_1)$ we just add up the probability of all of the paths that include $\mathcal{H}_1$.  We can apply this technique to each of the events we care about.
+We can compute each of the terms in the preceding equation using the tree diagram.  In total there are 8 possible paths through the tree.  Recall that we can find the probability of a path by multiplying the numbers on the lines.  To find the probability of a particular event, say $p(\mathcal{H}_1)$ we just add up the probability of all of the paths that include $\mathcal{H}_1$.  We can apply this technique to each of the events we care about.
 
 \begin{align}
 p(\mathcal{H}_1) &= p(\mathcal{C}_1, \mathcal{H}_1, \mathcal{H}_2) +  p(\mathcal{C}_1, \mathcal{H}_1, \neg \mathcal{H}_2)+  p(\mathcal{C}_2, \mathcal{H}_1, \mathcal{H}_2) +  p(\mathcal{C}_2, \mathcal{H}_1, \neg \mathcal{H}_2) \nonumber \\
@@ -298,7 +298,7 @@ p(\mathcal{A}, \mathcal{B} | \mathcal{C}) &= p(\mathcal{A} | \mathcal{C}) p(\mat
 
 \begin{exercise}[(20 minutes)]
 \bes
-\item Show that $\mathcal{H}_1 \condindep \mathcal{H}_2~|~\mathcal{C}_1$
+\item Show that $\mathcal{H}_1 \condindep \mathcal{H}_2~|~\mathcal{C}_1$. Remember to use the tree above!
 \begin{boxedsolution}
 We need to show that $p(\mathcal{H}_1 , \mathcal{H}_2 | \mathcal{C}_1) = p(\mathcal{H}_1 | \mathcal{C}_1) p(\mathcal{H}_2 | \mathcal{C}_1)$.  We can use the tree diagram to compute these conditional probabilities by starting our multiplication after the branch that we are conditioning on.
 \begin{align}
