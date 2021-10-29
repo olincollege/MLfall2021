@@ -8,10 +8,11 @@
 
 {\rhead{Assignment 2 \linebreak \textit{Version: \today}}}
 
-\title{Assignment 2: Bayesian Networks}
+\title{Assignment 2: (Un)Fairness and Probability}
 \author{Machine Learning}
 \date{Fall 2019}
 
+\renewcommand{\arraystretch}{3}
 \begin{document}
 
 \maketitle
@@ -27,8 +28,11 @@
 \ei
 \end{learningobjectives}
 
+Note: This assignment is a bit longer than average. We are trying to shift things so that weekend assignments are a bit longer and the assignments during the week are a bit shorter. If you decide to ask for an extension, we suggest that you prioritize looking at the COMPAS Model section, so that you are prepared for our class discussion.
 
-\section{COMPAS Model}
+A quick thanks to two former students, Micah Reid (currently a CA) and Miranda Lao for their contributions to this and the following assignment. As part of their final project, they explored metrics of fairness and disparity and proposed assignment extensions (pieces of which appear in this and the following assignment). 
+
+\section{COMPAS Model: Race, Criminal Justice, and Machine Learning}
 
 \begin{notice}
 We are going to think about race and criminal justice in the United States. Before we dive into this, we want to acknowledge:
@@ -59,6 +63,82 @@ This article is intended to provide some background information on criminal just
 \end{exercise}
 
 
+
+\subsection{Confusion Matrices}
+Before we dig into the articles on the COMPAS algorithm, we want to introduce \/ refresh on the confusion matrix and some related terms. These will be essential to making sense of the debate below and for learning about different metrics of fairness. The binary confusion matrix is a 2x2 chart where the y axis is whether the model output predicts a positive or negative response, and the x axis is whether or not the actual or measured output is positive or negative. This gives us four quadrants: true positives, false positives, true negatives, and false negatives.\\
+
+\begin{center}
+\includegraphics[width=0.5\linewidth]{figures/confusion}
+\end{center}
+%\begin{center}
+%\begin{tabular}{|m|m|m|} 
+%\hline
+%& \textbf{Actual Positive} & \textbf{Actual Negative} 
+%\hline
+%\textbf{Predicted Positive} & True Positive (TP) & False Positive (FP) 
+%\hline
+%\textbf{Predicted Negative} & False Negative (FN) & True Negative (TN) \\ 
+%\hline
+%\end{tabular}
+%\end{center}
+
+It is worth stating that the confusion matrix only works for classification, so if the model outputs are continuous, a cutoff threshold may be necessary. These confusion matrix metrics can be more informative than more general accuracy metrics like log loss, because they can pinpoint the strong and weak points of a model. The four quadrants can also be used to calculate a number of metrics that can show how the model performs with regards to different concerns. \\
+
+These definitions are relatively straightforward. We call the total number of actual positives the \textbf{condition positive (P)}, where $P = TP + FN$. The total number of actual negatives is the \textbf{condition negative (N)}, where $N = FP + TN$. \\
+
+A variety of combinations of these 4 quadrants (TP, FP, FN, and TN) are found in the building blocks widely used fairness metrics in machine learning. These building blocks include:
+
+\bi
+\item \textbf{True Positive Rate (TPR): } $TPR = \frac{TP}{P}$
+\item \textbf{True Negative Rate (TNR): }  $TNR = \frac{TN}{N}$
+\item \textbf{False Positive Rate (FPR): } $FPR = \frac{FP}{P}$
+\item \textbf{False Negative Rate (FNR): } $FNR = \frac{FN}{P}$
+\item \textbf{Positive Predictive Value (PPV): } $PPV = \frac{TP}{TP+FP}$
+\item \textbf{Negative Predictive Value (NPV): } $NPV = \frac{TN}{TN+FN}$
+\item \textbf{False Discovery Rate (FDR): } $FDR = \frac{FP}{TP+FP}$
+\item \textbf{False Omission Rate (FOR): } $FOR = \frac{FN}{TN+FN}$
+\ei
+
+\begin{exercise}[\faShareAlt~(30 minutes)]
+Consider the following confusion matrix:
+\begin{center}
+\includegraphics[width=0.5\linewidth]{figures/confusionNumbers}
+\end{center}
+
+\bes
+\item Compute the metrics listed above for this confusion matrix. \\
+
+\begin{boxedsolution}
+$\textbf{TPR =} 100 / (100 + 5) \approx .95$\\
+$\textbf{FPR =} 20  / (20 + 40) \approx .33$\\
+$\textbf{PPV =} 100 / (100 + 20) \approx .83$\\
+$\textbf{NPV =} 40 / (40 + 5) \approx .89$\\
+$\textbf{TNR =} 40 / (40 + 20) \approx .67$\\
+$\textbf{FNR =} 5 / (100 + 5) \approx .05$\\
+$\textbf{FDR =} 20 / (100 + 20) \approx .17$\\
+$\textbf{FOR =} 5 / (5 + 40) \approx .11$\\
+$\textbf{CSI =} 100 / (100 + 5 + 20) = .8$
+\end{boxedsolution}
+
+\item If you've completed part a, you may have noticed that each metric above other than CSI has an inverse (for example the True Positive Rate is equal to 1 - False Negative Rate). Find the inverse for each of the metrics listed above.
+
+
+\begin{boxedsolution}
+True Positive Rate is the inverse of False Negative Rate.\\
+True Negative Rate is the inverse of False Positive Rate.\\
+Positive Predictive Value is the inverse of False Discovery Rate.\\
+Negative Predictive Value is the inverse of False Omission Rate.\\
+\end{boxedsolution}
+
+\item Consider the following scenarios: imagine you are creating a model to determine whether someone should be brought in for an additional cancer screening based upon initial test results. Which metric would you care most about minimizing? What if instead you were creating a model to determine whether a defendant should be prosecuted for a low level offense?
+
+\begin{boxedsolution}
+This depends on your own philosophy and strategy. We will explore some general guidance on this later.
+\end{boxedsolution}
+\ees
+
+\end{exercise}
+
 \begin{exercise}[\faShareAlt~(90 minutes)]
 In this module, we'll be spending time talking about the Correctional Offender Management Profiling for Alternative Sanctions (COMPAS) algorithm, produced by the company Northpointe, Inc. COMPAS was intended to assess the risk of recidivism. This is a well-known algorithm in machine learning communities. 
 
@@ -80,7 +160,7 @@ We would like to be clear about when the COMPAS metric is applied. It is applied
 
 Please read \href{https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm}{How We Analyzed the COMPAS Recidivism Algorithm.}
 
-\item Please read the \href{https://drive.google.com/file/d/1SSbotzlsVkj4L2VhPC7R_XH0VBqOQsnT/view?usp=sharing}{Northpointe rebuttal}. This is a long reading. It has a lot of jargon, and some acronyms are not defined. We suggest limiting yourself to 60 minutes for this reading. You may consider working with a classmate on this reading, so you can both discuss what you think the author is saying. We're including this whole reading here because we would like you to engage with the real-world material.
+\item Please read the \href{https://drive.google.com/file/d/1SSbotzlsVkj4L2VhPC7R_XH0VBqOQsnT/view?usp=sharing}{Northpointe rebuttal}. This is a long reading. It has a lot of jargon, and some acronyms are not defined. We strongly suggest limiting yourself to 60 minutes for this reading (perhaps read the conclusion early on). You may consider working with a classmate on this reading, so you can both discuss what you think the author is saying. We're including this whole reading here because we would like you to engage with the real-world material.
 \ees
 \end{exercise}
 
@@ -96,8 +176,8 @@ Please read \href{https://www.propublica.org/article/how-we-analyzed-the-compas-
 
 
 
-\section{Motivation and Context}
-In the last assignment we learned the basic definition of a probability and acquired some very powerful rules for working with probabilities.  In this assignment you'll be taking these ideas and extending them in the following significant ways.
+\section{Motivation and Context for Probability}
+In the last assignment we learned the basic definition of a probability and acquired some very powerful rules for working with probabilities.  In the rest of this assignment you'll be taking these ideas and extending them in the following significant ways.
 
 \bi
 \item You'll learn a graphical way to represent the relationships between probabilities that will make it much easier to work with large probabilistic models.
@@ -298,7 +378,7 @@ p(\mathcal{A}, \mathcal{B} | \mathcal{C}) &= p(\mathcal{A} | \mathcal{C}) p(\mat
 
 \begin{exercise}[(20 minutes)]
 \bes
-\item Show that $\mathcal{H}_1 \condindep \mathcal{H}_2~|~\mathcal{C}_1$. Remember to use the tree above!
+\item Show that $\mathcal{H}_1 \condindep \mathcal{H}_2~|~\mathcal{C}_1$. Remember to use the tree above! Notation comment: Interpret this as: $(\mathcal{H}_1 \condindep \mathcal{H}_2 )~|~\mathcal{C}_1$
 \begin{boxedsolution}
 We need to show that $p(\mathcal{H}_1 , \mathcal{H}_2 | \mathcal{C}_1) = p(\mathcal{H}_1 | \mathcal{C}_1) p(\mathcal{H}_2 | \mathcal{C}_1)$.  We can use the tree diagram to compute these conditional probabilities by starting our multiplication after the branch that we are conditioning on.
 \begin{align}
@@ -401,8 +481,8 @@ While the graphical structure of the BN is useful for decomposing the joint dist
 
 \begin{externalresources}[(30 minutes)]
 \bi
-\item Read \href{http://nb.mit.edu/f/56085}{d-Separation without Tears} (don't worry about the third page).
-\item These videos are pretty good, but the reading seems clearer (let us know what you think on NB) \href{https://www.youtube.com/watch?v=IjoWqnH6HmU}{part 1}, \href{https://www.youtube.com/watch?v=zJIK5uOyJi0}{part 2}.
+\item Read \href{http://www.dagitty.net/learn/dsep/index.html}{d-Separation without Tears}.
+\item These videos are pretty good, but the reading seems clearer to us \href{https://www.youtube.com/watch?v=IjoWqnH6HmU}{part 1}, \href{https://www.youtube.com/watch?v=zJIK5uOyJi0}{part 2}.
 \ei
 \end{externalresources}
 
