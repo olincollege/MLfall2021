@@ -99,6 +99,8 @@ A variety of combinations of these 4 quadrants (TP, FP, FN, and TN) are found in
 \item \textbf{False Omission Rate (FOR): } $FOR = \frac{FN}{TN+FN}$
 \ei
 
+It may be helpful to check out this \href{https://research.google.com/bigpicture/attacking-discrimination-in-ml/}{write-up from Google of the loan example}. The visualizations are good.
+
 \begin{exercise}[\faShareAlt~(30 minutes)]
 Consider the following confusion matrix:
 \begin{center}
@@ -129,6 +131,8 @@ True Negative Rate is the inverse of False Positive Rate.\\
 Positive Predictive Value is the inverse of False Discovery Rate.\\
 Negative Predictive Value is the inverse of False Omission Rate.\\
 \end{boxedsolution}
+
+\i
 
 \item Consider the following scenarios: imagine you are creating a model to determine whether someone should be brought in for an additional cancer screening based upon initial test results. Which metric would you care most about minimizing? What if instead you were creating a model to determine whether a defendant should be prosecuted for a low level offense?
 
