@@ -87,7 +87,7 @@ In a classification problem we are interested in predicting the output for a giv
 \end{understandingcheck}
 
 \subsection{Generative Models (10 minute read)}
-The approach outlined above is great, but it's not the only way to approach binary classification (and supervised learning in general).  Since we are interested in predicting $Y_i$ given some inputs $\mathbf{x_i}$, it of course makes sense, for example for a binary classification problem, to want to determine $p(Y_i = 1 | \mathbf{x_i})$.  However, Instead of modeling that distribution directly, we can use Bayes' rule.
+The approach outlined above is great, but it's not the only way to approach binary classification (and supervised learning in general).  Since we are interested in predicting $Y_i$ given some inputs $\mathbf{x_i}$, it of course makes sense, for example for a binary classification problem, to want to determine $p(Y_i = 1 | \mathbf{x_i})$.  However, instead of modeling that distribution directly, we can use Bayes' rule.
 
 \begin{align}
 p(Y_i  = 1 | X_i = \mathbf{x_i}) &= \frac{p(X_i = \mathbf{x_i} | Y_i = 1) p(Y_i = 1)}{p(X_i = \mathbf{x_i})} \label{eq:pgm} \\
