@@ -90,9 +90,9 @@ Sometimes these metrics conflict, so we need to choose carefully based on our ap
 \bes
 \item Calculate the Statistical Parity Difference, Equal Opportunity Difference, Average Odds Difference, and Disparate Impact of the confusion matrices below. What do you notice? Is this model ``fair''?
 
-%\begin{center}
-%\includegraphics[width=0.5\linewidth]{figures/confusionPrivUnpriv}
-%\end{center}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{figures/confusionPrivUnpriv}
+\end{center}
 
 
 \begin{boxedsolution}
@@ -123,7 +123,7 @@ As we can see, it is good to check a variety of metrics, because sometimes a mod
 
 \item The Data Science and Public Policy group at Carnegie Mellon University created a decision tree with proposed guidance about which metrics of fairness might be desirable in different situations. Take a look at  \href{http://www.datasciencepublicpolicy.org/wp-content/uploads/2018/05/metrictree-1024x640.png}{their decision tree}. Try to understand why each decision leads to the metrics that it does. 
 
-\item Based on the decision tree above, what metric would they suggest for fairness in attempting to predict prison recidivism? What about banks offering loans? Does this align with the metrics you would choose?
+\item Based on the decision tree above, what metric would they suggest for fairness in attempting to predict if a person will be arrested again? What about banks offering loans? Does this align with the metrics you would choose?
 
 
 
@@ -131,7 +131,7 @@ As we can see, it is good to check a variety of metrics, because sometimes a mod
 %\bi
 %\item Northpointe is using sufficiency $Y \condindep A~|~R$.  You'll notice that in the reading they say that sufficiency is the same thing as matching positive and negative predictive value for all values of the protected attribute.
 %\item Propublica is using separation $R \condindep A~|~Y$.  This fairness principle requires the false positive and true positive rates to be the same across for all values of the protected attribute. (average odds difference)
-%\ei
+%ei
 %\end{boxedsolution}
 
 \ees
@@ -140,12 +140,12 @@ As we can see, it is good to check a variety of metrics, because sometimes a mod
 
 
 \section*{The Impossibility Theorem of Fairness (15 minutes)}
-As we explored in the previous problems, we often cannot satisfy every fairness metric at the same time. This leads to an interesting ethical discussion about when it is appropriate to use a given metric, and when it is okay to accept a failing score on a given fairness metric. Above we show a decision tree for certain metrics that we took from \href{http://www.datasciencepublicpolicy.org/our-work/tools-guides/aequitas/}{Aequitas}, a bias detection toolkit created by the University of Chicago Center for Data Science and Public Policy (now at Carnegie Mellon). 
+As we explored in the previous problems, we often cannot satisfy every fairness metric at the same time. This leads to an interesting ethical discussion about when it is appropriate to use a given metric, and when it is okay to accept a failing score on a given fairness metric. Above we linked to a decision tree for certain metrics that we took from \href{http://www.datasciencepublicpolicy.org/our-work/tools-guides/aequitas/}{Aequitas}, a bias detection toolkit created by the University of Chicago Center for Data Science and Public Policy (now at Carnegie Mellon). 
  
-Choosing a fairness metric in a way that is ethical is a highly subjective task. Even though decision trees exist to help policymakers and model creators evaluate their models, this is an active area of research and discussion. One great resource for learning about up and coming developments in this field is \href{https://facctconference.org/}{the FAccT conference}, where researchers and technologists discuss and present research on Fairness, Accountability, and Transparency in ML. At the heart of these debates is the Impossibility Theorem of Fairness, which essentially says that there are many fairness metrics that are mutually exclusive in the vast majority of cases. 
+Choosing a fairness metric in a way that is ethical is a subjective task. Even though decision trees exist to help policymakers and model creators evaluate their models, this is an active area of research and discussion. One great resource for learning about up and coming developments in this field is \href{https://facctconference.org/}{the FAccT conference}, where researchers and technologists discuss and present research on Fairness, Accountability, and Transparency in ML. At the heart of these debates is the Impossibility Theorem of Fairness, which essentially says that there are many fairness metrics that are mutually exclusive in the vast majority of cases. 
 
 \begin{exercise}
-Look up group and individual fairness. This \href{https://www.youtube.com/watch?v=kok73C50RLA}{video from the FAcct Conference (formerly called the FAT conference)} may be helpful, though it doesn't clearly lay out definitions. \\
+Look up group and individual fairness. This \href{https://www.youtube.com/watch?v=kok73C50RLA}{video from the FAcct Conference (formerly called the FAT conference)} may be helpful, though it doesn't clearly lay out definitions. We encourage you to practice finding your own resources. \\
 
 What is group fairness? What is individual fairness? Why/When are these two notions of fairness in conflict?
 \begin{boxedsolution}
@@ -225,7 +225,7 @@ Post processing is the practice of modifying an existing model’s output to sat
 \section{Generative versus Discriminative Models (5 minutes)}
 Now, we will shift gears back to applying probability to models. So far, we have built up some machinery that allows us to work with probabilities.  Next we're going to take this machinery and turn back towards machine learning.  Specifically, we'll be looking at the classification problem and using probability theory to see it in a whole new light.
 
-\href{https://www.youtube.com/watch?v=HHNESCbZqUg}{This short video} provides a quick overview of generative versus discriminative models, which may be helpful prep for reading the next sections.
+\href{https://www.youtube.com/watch?v=HHNESCbZqUg}{This short video} provides a quick overview of generative versus discriminative models, which may be helpful prep for reading the next sections. Please watch it.
 
 
 \subsection{Discriminative Models: a Look Back at Logistic Regression (10 minute read)}
@@ -264,7 +264,7 @@ These equations tell us is that if we have a model of the probability of the out
 
 The natural question is \emph{why?} Here are some potential advantages of using probabilistic generative models.
 \bi
-\item Suppose you found out that $p(Y_i)$ changed for some reason (any thoughts on when this might happen?  Post here on NB).  Incorporating this change into a probabilistic graphical model would be very straightforward (just modify $p(Y_i =1)$ in Equation~\ref{eq:pgm}).
+\item Suppose you found out that $p(Y_i)$ changed for some reason (any thoughts on when this might happen?  Share on discord!).  Incorporating this change into a probabilistic graphical model would be very straightforward (just modify $p(Y_i =1)$ in Equation~\ref{eq:pgm}).
 \item Suppose you found out that $p(X_i  = \mathbf{x_i} | Y_i = y_i)$ changed for some reason.  For example, if one of the elements of $X_i$ represents a result obtained by running some sort of medical test, the sensitivity of that medical test might change (any other examples on when this might happen? Post here on NB.).
 \item Suppose that instead of classifying data (i.e., predicting $Y_i$), you instead wanted to generate samples $\mathbf{x_i}$ conditioned on a particular value of $Y_i$ (e.g., you might want to \href{https://www.youtube.com/watch?v=LzE1fF0_3q0}{synthesize samples of hand written digits} based on training a probabilistic graphical model).  This can be done naturally with a PGM.  More modern versions of this idea are generative adversarial networks (GANs), which are behind such work as this \href{https://thispersondoesnotexist.com/}{person does not exist} and \href{https://openai.com/blog/better-language-models/}{better language models and their implications} (the second link is the work of a former Oliner!).
 \ei
