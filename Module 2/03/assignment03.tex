@@ -59,7 +59,7 @@ There are many measures of bias, but today we will be focusing on the five commo
         \item Fairness for this metric is between -0.1 and 0.1
         \item Calculated as the difference between the privileged TPR and unprivileged TPR.
     \end{itemize}
-    \item \textbf{Average Odds Difference} is computed as the average difference of false positive rate and true positive rate between unprivileged and privileged groups.
+    \item \textbf{Average Odds Difference} is computed as the average difference of false positive rate and true positive rate between unprivileged and privileged groups. %(Also called Separation?.)
     \begin{itemize}
         \item The ideal value of this metric is 0.
         \item A value of < 0 implies higher benefit for the privileged group and a value > 0 implies higher benefit for the unprivileged group.
@@ -83,7 +83,7 @@ There are many measures of bias, but today we will be focusing on the five commo
 
 Sometimes these metrics conflict, so we need to choose carefully based on our application which ones to minimize. 
 
-\begin{exercise}[(60 Minutes)]
+\begin{exercise}[(40 Minutes)]
 \bes
 \item Calculate the Statistical Parity Difference, Equal Opportunity Difference, Average Odds Difference, and Disparate Impact of the confusion matrices below. What do you notice? Is this model fair?
 
@@ -120,30 +120,55 @@ As we can see, it is good to check a variety of metrics, because sometimes a mod
 
 \item The Data Science and Public Policy group at Carnegie Mellon University created a decision tree with proposed guidance about which metrics of fairness might be desirable in different situations. Take a look at  \href{http://www.datasciencepublicpolicy.org/wp-content/uploads/2018/05/metrictree-1024x640.png}{their decision tree}. Try to understand why each decision leads to the metrics that it does. 
 
+\item Based on the decision tree above, what metric would they suggest for fairness in attempting to predict prison recidivism? What about banks offering loans? Does this align with the metrics you would choose?
+
+
+
+%\begin{boxedsolution}
+%\bi
+%\item Northpointe is using sufficiency $Y \condindep A~|~R$.  You'll notice that in the reading they say that sufficiency is the same thing as matching positive and negative predictive value for all values of the protected attribute.
+%\item Propublica is using separation $R \condindep A~|~Y$.  This fairness principle requires the false positive and true positive rates to be the same across for all values of the protected attribute. (average odds difference)
+%\ei
+%\end{boxedsolution}
+
 \ees
 \end{exercise}
 
 
 
-\section*{The Impossibility Theorem of Fairness}
+\section*{The Impossibility Theorem of Fairness (15 minutes)}
 As we explored in the previous problems, we often cannot satisfy every fairness metric at the same time. This leads to an interesting ethical discussion about when it is appropriate to use a given metric, and when it is okay to accept a failing score on a given fairness metric. Above we show a decision tree for certain metrics that we took from \href{http://www.datasciencepublicpolicy.org/our-work/tools-guides/aequitas/}{Aequitas}, a bias detection toolkit created by the University of Chicago Center for Data Science and Public Policy (now at Carnegie Mellon). 
  
 Choosing a fairness metric in a way that is ethical is a highly subjective task. Even though decision trees exist to help policymakers and model creators evaluate their models, this is an active area of research and discussion. One great resource for learning about up and coming developments in this field is \href{https://facctconference.org/}{the FAccT conference}, where researchers and technologists discuss and present research on Fairness, Accountability, and Transparency in ML. At the heart of these debates is the Impossibility Theorem of Fairness, which essentially says that there are many fairness metrics that are mutually exclusive in the vast majority of cases. 
 
-\begin{externalresources}[60 Minutes]
-\href{https://www.youtube.com/watch?v=jIXIuYdnyyk}{This lecture on the tradeoffs of different fairness metrics} talks about the societal impact of different fairness metrics, and explains the Impossibility Theorem of Fairness in more depth.
-\end{externalresources}
+\begin{exercise}
+Look up group and individual fairness. This \href{https://www.youtube.com/watch?v=kok73C50RLA}{video from the FAcct Conference (formerly called the FAT conference)} may be helpful, though it doesn't clearly lay out definitions. \\
 
-\begin{understandingcheck}
-What is group fairness? What is individual fairness? Why are these two notions of fairness in conflict?
+What is group fairness? What is individual fairness? Why/When are these two notions of fairness in conflict?
 \begin{boxedsolution}
 Group fairness is focused on comparing metrics between privileged and unprivileged groups to ensure that they have comparable outcomes. Individual fairness is focused on treating the same data and situations the same way across individuals regardless of group affiliation. These can be in conflict because often times to achieve equal representation of positive outcomes between groups, the each group needs to have different criteria for triggering a positive outcome, under the assumption that their average input data or situations are not the same.
 \end{boxedsolution}
+\end{exercise}
 
-\end{understandingcheck}
-\section*{Bias Mitigation}
+\begin{externalresources}
+The following are OPTIONAL extensions if you are passionate about this topic. You might also return to these in your final project.
 
-Now that we have discussed different ways to detect bias, we want to briefly think about how we can reduce bias and algorithmic discrimination. There are various toolboxes that have been designed to help mitigate bias in algorithms and data, including \href{http://www.datasciencepublicpolicy.org/our-work/tools-guides/aequitas/}{Aequitas (from Carnegie Mellon - this also includes a more detailed decision tree)} and the \href{http://aif360.mybluemix.net/data}{IBM AI Fairness 360 (which you can see a demo of here)}. There are a number of bias mitigation strategies, and each has several variations, but all bias mitigation strategies can be broken up into three categories.
+\bes
+\item If you want to make a deeper connection between the probability topics of statistical independence and metrics of fairness, then you may want to R=read \href{https://fairmlbook.org/classification.html}{Fairness and Machine Learning Chapter 2}.  Start at the section \emph{Formal non-discrimination criteria} and read up to (but not including) the section \emph{Calibration and sufficiency}.
+
+\item If you want to listen to someone talk about fairness metrics in more depth, \href{https://www.youtube.com/watch?v=jIXIuYdnyyk}{this lecture on the tradeoffs of different fairness metrics} talks about the societal impact of different fairness metrics, and explains the Impossibility Theorem of Fairness in more depth.
+
+\item \href{http://www-student.cse.buffalo.edu/~atri/algo-and-society/support/notes/fairness/index.html}{This website from the University of Buffalo} looks to have a beautiful walk-through of fairness and direct references to COMPAS. This was created since we last taught the class, and I just found it (so we haven't had a chance to do a deep check... let us know what you think if you take a look.)
+\ees
+\end{externalresources}
+
+
+
+
+\section*{Bias Mitigation (5 minute read)}
+
+Now that we have discussed different ways to detect bias, we want to briefly think about how we can reduce bias and algorithmic discrimination. There are various toolboxes that have been designed to help mitigate bias in algorithms and data, including \href{http://www.datasciencepublicpolicy.org/our-work/tools-guides/aequitas/}{Aequitas (from Carnegie Mellon - this also includes a more detailed decision tree)} and the \href{http://aif360.mybluemix.net/data}{IBM AI Fairness 360 (which you can see a demo of here)}. We won't dig into these strategies specifically, but this is a great area to dig deeper (including through your next assignment and final project).\\ 
+For now, we just want to mention that there are a number of bias mitigation strategies, and each has several variations, but all bias mitigation strategies can be broken up into three categories.
  \subsection*{Pre-processing}
  Pre-processing is the practice of modifying a dataset before training a model. Models learn bias from uneven representation in datasets, stemming from problems with sampling distribution, or from existing social phenomena that create uneven distribution of input situations and outcomes between demographic groups. The theory behind preprocessing is that if a dataset represents a fair distribution of outcomes between demographic groups, any model trained on that data will learn to classify in a fair manner. Preprocessing is often the preferred method of bias mitigation, since it allows for transparency in the bias mitigation process, and it does not change the model training process. It also allows for those who release datasets to ensure that models using those datasets are fair, regardless of who is making them. However, it requires foresight to use since it needs to be implemented before the model is trained, so often model creators opt for in-processing or post-processing.
  \subsection*{In-processing}
