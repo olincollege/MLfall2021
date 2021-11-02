@@ -19,11 +19,14 @@
 
 \begin{learningobjectives}
 \bi
-\item Learn about the connection between probabilistic criteria for algorithmic fairness and Bayesian Networks.
-\item Solidify your understanding of the Na\"ive Bayes algorithm by applying it to movie review sentiment classification.
+\item Learn about metrics for algorithmic fairness.
+\item Learn about different sources of bias in machine learning.
+\item Understand the difference between discriminative models and generative models.
+\item Revisit the Na\"ive Bayes algorithm with a Titanic dataset example.
 \ei
 \end{learningobjectives}
 
+Another thanks to two former students, Micah Reid (currently a CA) and Miranda Lao for their contributions to this and the previous assignment. As part of their final project, they explored metrics of fairness and disparity and proposed assignment extensions (pieces of which appear in this and the following assignment). 
 
 \section{Reflecting on COMPAS and Algorithmic Fairness}
 
@@ -42,14 +45,14 @@ Additionally, if you would like to share something anonymously, here is an \href
 In the last assignment, we looked at confusion matrices and different metrics that can be calculated for a single confusion matrix. Now, we will look at some metrics for comparing two confusion matrices (e.g., if we break our results up to look at the outcomes for two different groups).\\
 
 As we saw in the COMPAS debate, confusion matrix metrics are often used to measure fairness and bias. Note that when we say algorithmic bias and fairness, we are referring to the phenomenon of models discriminating against protected or underprivileged groups (based on attributes such as race and gender), which often arises as a factor of bias that is integrated into the dataset used for training. This is common, because datasets often measure phenomena that are already subject to systemic bias and may include additional (usually unintended) bias introduced by the collectors and analysts of the data.\\ 
-When detecting algorithmic bias, we typically identify a protected class (such as people of color or women). Many of the popular measures of bias compare the confusion matrix metrics we went over in the last section between the protected and privileged class, either by taking a straightforward difference, or by taking a ratio between the values of the two metrics. These are often referred to as parity of a given metric, for example False Positive Rate Parity, which measures the difference in False Positives of the two groups. Many of the most commonly used metrics have a second name, for example the Equal Opportunity Difference is the same as True Positive Rate Parity.\\
+When detecting algorithmic bias, we typically identify a protected class (such as people of color or women). Many of the popular measures of bias compare the confusion matrix metrics we went over in the last assignment between the protected and privileged class, either by taking a straightforward difference, or by taking a ratio between the values of the two metrics. These are often referred to as parity of a given metric, for example False Positive Rate Parity, which measures the difference in False Positives of the two groups. Many of the most commonly used metrics have a second name, for example the Equal Opportunity Difference is the same as True Positive Rate Parity.\\
 There are many measures of bias, but today we will be focusing on the five common metrics. By understanding these metrics, you will have the tools to understand other, similar metrics that you may want to use in the future. It may be helpful to refer to the \href{http://research.google.com/bigpicture/attacking-discrimination-in-ml/}{loan example visualization from Google Research} again to wrap your head around this.
 \begin{itemize}
     \item \textbf{Statistical Parity Difference} is computed as the difference of the rate of favorable outcomes received by the unprivileged group to the privileged group. (Statistical parity is also called Independence or Demographic Parity.)
     \begin{itemize}
         \item The ideal value of this metric is 0.
         \item Fairness for this metric is between -0.1 and 0.1.
-        \item Calculated as the difference between predicted positive of the privileged and unprivileged groups.
+        \item Calculated as the difference between predicted positive rates of the privileged and unprivileged groups.
         \item A value of < 0 implies higher benefit for the privileged group and a value > 0 implies higher benefit for the unprivileged group.
     \end{itemize}
     \item \textbf{Equal Opportunity Difference} is computed as the difference of true positive rates between the unprivileged and the privileged groups.
@@ -85,7 +88,7 @@ Sometimes these metrics conflict, so we need to choose carefully based on our ap
 
 \begin{exercise}[(40 Minutes)]
 \bes
-\item Calculate the Statistical Parity Difference, Equal Opportunity Difference, Average Odds Difference, and Disparate Impact of the confusion matrices below. What do you notice? Is this model fair?
+\item Calculate the Statistical Parity Difference, Equal Opportunity Difference, Average Odds Difference, and Disparate Impact of the confusion matrices below. What do you notice? Is this model ``fair''?
 
 %\begin{center}
 %\includegraphics[width=0.5\linewidth]{figures/confusionPrivUnpriv}
@@ -154,7 +157,7 @@ Group fairness is focused on comparing metrics between privileged and unprivileg
 The following are OPTIONAL extensions if you are passionate about this topic. You might also return to these in your final project.
 
 \bes
-\item If you want to make a deeper connection between the probability topics of statistical independence and metrics of fairness, then you may want to R=read \href{https://fairmlbook.org/classification.html}{Fairness and Machine Learning Chapter 2}.  Start at the section \emph{Formal non-discrimination criteria} and read up to (but not including) the section \emph{Calibration and sufficiency}.
+\item If you want to make a deeper connection between the probability topics of statistical independence and metrics of fairness, then you may want to read \href{https://fairmlbook.org/classification.html}{Fairness and Machine Learning Chapter 2}.  Start at the section \emph{Formal non-discrimination criteria} and read up to (but not including) the section \emph{Calibration and sufficiency}.
 
 \item If you want to listen to someone talk about fairness metrics in more depth, \href{https://www.youtube.com/watch?v=jIXIuYdnyyk}{this lecture on the tradeoffs of different fairness metrics} talks about the societal impact of different fairness metrics, and explains the Impossibility Theorem of Fairness in more depth.
 
@@ -170,7 +173,7 @@ The following are OPTIONAL extensions if you are passionate about this topic. Yo
 Now that we have discussed different ways to detect bias, we want to briefly think about how we can reduce bias and algorithmic discrimination. There are various toolboxes that have been designed to help mitigate bias in algorithms and data, including \href{http://www.datasciencepublicpolicy.org/our-work/tools-guides/aequitas/}{Aequitas (from Carnegie Mellon - this also includes a more detailed decision tree)} and the \href{http://aif360.mybluemix.net/data}{IBM AI Fairness 360 (which you can see a demo of here)}. We won't dig into these strategies specifically, but this is a great area to dig deeper (including through your next assignment and final project).\\ 
 For now, we just want to mention that there are a number of bias mitigation strategies, and each has several variations, but all bias mitigation strategies can be broken up into three categories.
  \subsection*{Pre-processing}
- Pre-processing is the practice of modifying a dataset before training a model. Models learn bias from uneven representation in datasets, stemming from problems with sampling distribution, or from existing social phenomena that create uneven distribution of input situations and outcomes between demographic groups. The theory behind preprocessing is that if a dataset represents a fair distribution of outcomes between demographic groups, any model trained on that data will learn to classify in a fair manner. Preprocessing is often the preferred method of bias mitigation, since it allows for transparency in the bias mitigation process, and it does not change the model training process. It also allows for those who release datasets to ensure that models using those datasets are fair, regardless of who is making them. However, it requires foresight to use since it needs to be implemented before the model is trained, so often model creators opt for in-processing or post-processing.
+ Pre-processing is the practice of modifying a dataset before training a model. Models learn bias from uneven representation in datasets, stemming from problems with sampling distribution, or from existing social phenomena that create uneven distribution of input situations and outcomes between demographic groups. The theory behind preprocessing is that if a dataset represents a fair distribution of outcomes between demographic groups, any model trained on that data will learn to classify in a fair manner. Preprocessing is often the preferred method of bias mitigation, since it allows for transparency in the bias mitigation process (it's easy to document which data points you are excluding or estimating data for), and it does not change the model training process. It also allows for those who release datasets to evaluate the fairness of the dataset before sharing them, which will help improve the fairness of resulting models. However, it requires foresight to use since it needs to be implemented before the model is trained. Additionally, it is not always possible to create a dataset that is both accurate and provides a ``fair'' look at the world.
  \subsection*{In-processing}
  In-processing is the practice of considering notions of fairness while training a model. This is often done by integrating fairness metrics into the error or optimization function while training. In-processing is popular because it builds fairness directly into the model design, unlike pre-processing that only builds fairness into the training data.
 \subsection*{Post-processing}
@@ -217,9 +220,10 @@ Post processing is the practice of modifying an existing model’s output to sat
 
 %If you're interested in examining the Broward County COMPAS data yourself, we have put together \href{https://colab.research.google.com/github/mlfa19/assignments/blob/master/Module\%202/03/Exploring_COMPAS_Data.ipynb}{a notebook that reproduces the calculations that are at the heart of the two competing notions of fairness}.  The notebook is written in with some notebook exercises, but these are totally optional.  We expect that the default will be that folks will just take a look if they want to (or skip this if they don't). If you want to spend some extra time and solidify your understanding of true positive rate, false positive rate, positive predictive value, etc., then it might be worth doing it as a set of exercises.
 
+\vspace{4em}
 
 \section{Generative versus Discriminative Models (5 minutes)}
-So far, we have built up some machinery that allows us to work with probabilities.  Next we're going to take this machinery and turn back towards machine learning.  Specifically, we'll be looking at the classification problem and using probability theory to see it in a whole new light.
+Now, we will shift gears back to applying probability to models. So far, we have built up some machinery that allows us to work with probabilities.  Next we're going to take this machinery and turn back towards machine learning.  Specifically, we'll be looking at the classification problem and using probability theory to see it in a whole new light.
 
 \href{https://www.youtube.com/watch?v=HHNESCbZqUg}{This short video} provides a quick overview of generative versus discriminative models, which may be helpful prep for reading the next sections.
 
